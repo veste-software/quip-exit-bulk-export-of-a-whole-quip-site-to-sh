@@ -1,0 +1,74 @@
+{
+  "title": "Quip Exit: bulk export of a whole Quip site to SharePoint, Google Drive or Notion, with folders, co…",
+  "pitch": "For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: paste a Quip API token and pick folders. Documents become DOCX, HTML or Markdown and spreadsheets become XLSX; the folder tree is rebuilt, inline comments are saved and internal Quip links are rewritten to the new paths, ready for SharePoint, Google Drive or Notion. If it takes off, it becomes the reference 'leaving Quip' site, and the same export engine serves the next document-tool retirement.",
+  "platform": "web",
+  "language": "en",
+  "targetQueries": [
+    "quip export all documents",
+    "quip bulk export",
+    "quip to sharepoint migration",
+    "quip to notion",
+    "quip end of life",
+    "quip retirement 2027"
+  ],
+  "evidence": [
+    {
+      "url": "https://clonepartner.com/blog/quip-end-of-life-playbook-2027-choosing-your-migration-destination.md",
+      "note": "Retirement timeline; no bulk export in the web UI; manual export drops inline comments and data mentions; no native importer for SharePoint, Notion or Confluence; API limit 50 requests a minute per user",
+      "date": "2026-05-08"
+    },
+    {
+      "url": "https://www.onlyoffice.com/blog/2026/08/how-to-migrate-from-quip-before-its-2027-retirement",
+      "note": "Search result: a destination vendor's August 2026 migration guide, one of more than ten vendor posts on leaving Quip (not opened)",
+      "date": "2026-08-01"
+    }
+  ],
+  "competitors": [
+    {
+      "name": "Salesforce in-product Quip-to-Slack-canvases flow",
+      "url": "https://clonepartner.com/blog/quip-end-of-life-playbook-2027-choosing-your-migration-destination.md",
+      "verdict": "partial",
+      "gap": "Slack only, needs Slack Business+, tables capped at 300 cells, not yet in every tenant"
+    },
+    {
+      "name": "ClonePartner migration service",
+      "url": "https://clonepartner.com/blog/quip-end-of-life-playbook-2027-choosing-your-migration-destination.md",
+      "verdict": "partial",
+      "gap": "Done-for-you project from $500; not self-serve"
+    },
+    {
+      "name": "Coda native Quip importer",
+      "url": "https://clonepartner.com/blog/quip-end-of-life-playbook-2027-choosing-your-migration-destination.md",
+      "verdict": "partial",
+      "gap": "Only into Coda; grids lose formulas and relations"
+    }
+  ],
+  "trigger": {
+    "what": "Salesforce retires all Quip products: subscriptions cannot renew after 2027-03-01, then 90 days read-only, then logins blocked and data deleted; no bulk export in the UI and manual export drops comments",
+    "date": "2026-05-08",
+    "url": "https://clonepartner.com/blog/quip-end-of-life-playbook-2027-choosing-your-migration-destination.md"
+  },
+  "window": "Each customer's deadline is their renewal date (no later than 2027-03-01) plus 90 days read-only, so the need peaks between now and mid-2027 and then ends.",
+  "monetizationIdea": "A free dry run counts documents, comments and links; the full export costs 149 EUR per workspace, against a $500+ service.",
+  "money": {
+    "payer": "a team lead or Salesforce admin at a small or mid-size company with a few hundred to a few thousand Quip documents",
+    "buys": "a complete, structured export to the destination they chose, without a $500+ service or days of one-by-one manual exports that lose comments",
+    "model": "one-off",
+    "price": "149 EUR once per workspace (up to 2,000 documents)",
+    "priceEur": 149,
+    "billing": "once",
+    "proof": [
+      {
+        "url": "https://clonepartner.com/blog/quip-end-of-life-playbook-2027-choosing-your-migration-destination.md",
+        "note": "ClonePartner sells this migration at a fixed price from $500 per project",
+        "date": "2026-05-08"
+      }
+    ],
+    "nobodyPaysIf": "Companies on Quip are mostly Salesforce customers: they take Salesforce's free Slack canvas flow, have IT script the Quip API with an AI assistant, or buy through procurement instead of with a card."
+  },
+  "risks": [
+    "Handling customers' API tokens must stay in the browser or pass through a stateless relay",
+    "The audience shrinks to zero after mid-2027"
+  ],
+  "edge": "Checked in the ClonePartner comparison (2026-05-08): there is no native Quip importer for SharePoint, Notion or Confluence, and manual export drops comments. The only tools are Salesforce's Slack flow and Coda's importer; everything else is a $500+ service."
+}
