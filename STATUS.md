@@ -1,6 +1,6 @@
 # Quip Exit: bulk export of a whole Quip site to SharePoint, Google Drive or Notion, with folders, co…
 
-**Stage:** seo · **Platform:** web · **Score:** 3.1/5 · **Spend:** $9.13
+**Stage:** qa · **Platform:** web · **Score:** 3.1/5 · **Spend:** $9.33
 
 For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: paste a Quip API token and pick folders. Documents become DOCX, HTML or Markdown and spreadsheets become XLSX; the folder tree is rebuilt, inline comments are saved and internal Quip links are rewritten to the new paths, ready for SharePoint, Google Drive or Notion. If it takes off, it becomes the reference 'leaving Quip' site, and the same export engine serves the next document-tool retirement.
 
@@ -17,6 +17,12 @@ For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: past
 - [ ] [task 7] Create the Stripe account and the two products (149 EUR, 390 EUR) with tax ID collection and invoices; when going live, set STRIPE_SECRET_KEY, STRIPE_PRICE_SITE and STRIPE_PRICE_LARGE
 - [ ] [task 8] Deploy the Cloudflare Worker relay and the static site; set LICENSE_SIGNING_SECRET, QUIP_HOST_ALLOWLIST and PUBLIC_RELAY_URL (optionally PUBLIC_CF_ANALYTICS_TOKEN)
 - [ ] [task 9] Run one real export with a Quip test account to confirm CORS behaviour, the enterprise API host pattern, and that Notion's ZIP import keeps relative links
+- [ ] [task 10] Run npm run build, npm test and npm run design-check (not run in the growth session) and fix anything the new Base.astro JSON-LD code breaks
+- [ ] [task 11] Add the site to Google Search Console and Bing Webmaster Tools, submit sitemap.xml and use IndexNow via Bing
+- [ ] [task 12] Export a 1200x630 PNG from the brand kit as the social share image and add og:image
+- [ ] [task 13] Set PUBLIC_CF_ANALYTICS_TOKEN (Cloudflare Web Analytics) so traffic can be measured
+- [ ] [task 14] Submit to AlternativeTo and decide whether to do a Product Hunt or Show HN launch; post in Salesforce Trailblazer and Reddit threads only where someone asked, and disclose that you built the tool
+- [ ] [task 15] Check on a real Notion account whether relative Markdown links become page links, then update /quip-to-notion
 
 ## Recommendation
 
@@ -71,3 +77,4 @@ one-off (Free: unlimited dry run plus export of up to 20 documents. Site pass 14
 - 2026-11-15 15:43 · planned · scaffold and plan written
 - 2026-11-15 16:15 · building · build started
 - 2026-11-15 16:15 · seo · all planned tasks done
+- 2026-11-15 16:21 · qa · seo and conversion foundations written
