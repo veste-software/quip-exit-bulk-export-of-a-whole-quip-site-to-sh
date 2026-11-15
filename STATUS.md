@@ -1,6 +1,6 @@
 # Quip Exit: bulk export of a whole Quip site to SharePoint, Google Drive or Notion, with folders, co…
 
-**Stage:** qa · **Platform:** web · **Score:** 3.1/5 · **Spend:** $10.69
+**Stage:** building · **Platform:** web · **Score:** 3.1/5 · **Spend:** $11.02
 
 For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: paste a Quip API token and pick folders. Documents become DOCX, HTML or Markdown and spreadsheets become XLSX; the folder tree is rebuilt, inline comments are saved and internal Quip links are rewritten to the new paths, ready for SharePoint, Google Drive or Notion. If it takes off, it becomes the reference 'leaving Quip' site, and the same export engine serves the next document-tool retirement.
 
@@ -89,3 +89,4 @@ one-off (Free: unlimited dry run plus export of up to 20 documents. Site pass 14
 - 2026-11-15 16:32 · qa · all planned tasks done
 - 2026-11-15 16:41 · building · QA round 1 found 3 blocker(s)
 - 2026-11-15 16:47 · qa · all planned tasks done
+- 2026-11-15 16:54 · building · visual review round 2: average 3.8
