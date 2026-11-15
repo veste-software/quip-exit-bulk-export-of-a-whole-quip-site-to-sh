@@ -1,6 +1,6 @@
 # Quip Exit: bulk export of a whole Quip site to SharePoint, Google Drive or Notion, with folders, co…
 
-**Stage:** qa · **Platform:** web · **Score:** 3.1/5 · **Spend:** $9.38
+**Stage:** building · **Platform:** web · **Score:** 3.1/5 · **Spend:** $10.53
 
 For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: paste a Quip API token and pick folders. Documents become DOCX, HTML or Markdown and spreadsheets become XLSX; the folder tree is rebuilt, inline comments are saved and internal Quip links are rewritten to the new paths, ready for SharePoint, Google Drive or Notion. If it takes off, it becomes the reference 'leaving Quip' site, and the same export engine serves the next document-tool retirement.
 
@@ -23,6 +23,12 @@ For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: past
 - [ ] [task 13] Set PUBLIC_CF_ANALYTICS_TOKEN (Cloudflare Web Analytics) so traffic can be measured
 - [ ] [task 14] Submit to AlternativeTo and decide whether to do a Product Hunt or Show HN launch; post in Salesforce Trailblazer and Reddit threads only where someone asked, and disclose that you built the tool
 - [ ] [task 15] Check on a real Notion account whether relative Markdown links become page links, then update /quip-to-notion
+- [ ] [task 16] Run one real export with a Quip test account: confirm CORS needs the relay, the enterprise host pattern, comment author names (author_id vs author_name), and that Notion's ZIP import keeps relative links.
+- [ ] [task 17] Upload a SharePoint-preset ZIP to a test library and check that the .url shortcuts open; adjust the preset if not.
+- [ ] [task 18] Create the Stripe account in test mode, create the 149 EUR and 390 EUR prices, enable tax ID collection and invoices, and set STRIPE_SECRET_KEY, STRIPE_PRICE_SITE, STRIPE_PRICE_LARGE and LICENCE_SECRET as Worker secrets.
+- [ ] [task 19] Deploy the Cloudflare Worker relay, set ALLOWED_ORIGIN and SITE_URL to the production site, and set PUBLIC_RELAY_URL for the site build.
+- [ ] [task 20] Publish the repository (or a public copy of worker/relay.ts) and give the URL so /security can link to the relay source.
+- [ ] [task 21] Pick the final brand name and domain (must not start with Quip), then add the site to Google Search Console and submit the sitemap.
 
 ## Recommendation
 
@@ -80,3 +86,4 @@ one-off (Free: unlimited dry run plus export of up to 20 documents. Site pass 14
 - 2026-11-15 16:21 · qa · seo and conversion foundations written
 - 2026-11-15 16:26 · building · visual review round 1: 1 problem(s) found by code on the front page
 - 2026-11-15 16:32 · qa · all planned tasks done
+- 2026-11-15 16:41 · building · QA round 1 found 3 blocker(s)
