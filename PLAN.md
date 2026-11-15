@@ -66,3 +66,9 @@ Each page uses `Base.astro`, links to the tool (`url('')#tool`), and is written 
 - `PUBLIC_RELAY_URL` is the relay address. Without it the real-token path shows an honest notice and only the sample site works. Worker secrets are listed in `.env.example`.
 - The mobile header still shows all three links (DESIGN.md asks for one under 480 px).
 - Home-page resume uses the newest unfinished run for the same host, user and preset; it re-runs the dry run first (about 30 requests per 100 documents).
+
+## Visual review round 1
+
+A designer who looked at the real pages said: The front page is not finished.
+
+- [ ] [Visual round 1] The logo from public/brand/logo.svg is not in the page header.
