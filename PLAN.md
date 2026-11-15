@@ -72,3 +72,9 @@ Each page uses `Base.astro`, links to the tool (`url('')#tool`), and is written 
 A designer who looked at the real pages said: The front page is not finished.
 
 - [x] [Visual round 1] The logo from public/brand/logo.svg is not in the page header.
+
+## QA round 1
+
+- [ ] [QA round 1] link-map.csv status values are 'rewritten'/'unresolved' but SPEC AC4e requires 3 'resolved' and 1 'unresolved'. Rename the status to 'resolved' (type LinkRow.status, rewriteLinks, run.ts stats filter… (src/lib/export/links.ts:30,56; src/lib/export/run.ts; test/qa.test.ts)
+- [ ] [QA round 1] npm audit --omit=dev reports 1 critical (astro <=7.4.6) and 3 high (sharp, zod) with a fix available (astro@7.4.12, major upgrade). Exposure is low (static output) but the rule is no high or critical… (package.json / package-lock.json)
+- [ ] [QA round 1] After Stripe Checkout the page reloads and the tool shows the empty form with no confirmation. The inventory and in-memory token are lost and the buyer is not told the payment worked or that they mus… (src/components/ExportTool.tsx (session_id useEffect, buy()))
