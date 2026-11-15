@@ -71,4 +71,4 @@ Each page uses `Base.astro`, links to the tool (`url('')#tool`), and is written 
 
 A designer who looked at the real pages said: The front page is not finished.
 
-- [ ] [Visual round 1] The logo from public/brand/logo.svg is not in the page header.
+- [x] [Visual round 1] The logo from public/brand/logo.svg is not in the page header.
