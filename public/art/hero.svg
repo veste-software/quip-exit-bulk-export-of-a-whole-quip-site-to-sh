@@ -51,9 +51,11 @@
     <path d="M150 576 V550 M140 560 L150 550 L160 560 M178 576 V550 M168 560 L178 550 L188 560 M138 588 H190" fill="none"/>
 
     <!-- ================= BETWEEN: the tape roll ================= -->
-    <polygon points="540,598 622,598 616,602 622,606 540,606" fill="#a8743c" stroke="none"/>
-    <circle cx="540" cy="572" r="34" fill="#a8743c"/>
-    <circle cx="540" cy="572" r="15" fill="#dfcba6"/>
+    <!-- a strip of tape runs from the roll up to the sealed carton's top seam -->
+    <path d="M540 478 C 540 360, 700 310, 802 268" fill="none" stroke="#a8743c" stroke-width="14" stroke-linecap="butt"/>
+    <polygon points="540,598 660,598 652,602 660,606 540,606" fill="#a8743c" stroke="none"/>
+    <circle cx="540" cy="538" r="60" fill="#a8743c"/>
+    <circle cx="540" cy="538" r="26" fill="#dfcba6"/>
 
     <!-- ================= AFTER: the sealed carton on a sack truck ================= -->
     <!-- truck frame and handle, behind the carton -->

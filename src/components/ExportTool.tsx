@@ -239,7 +239,7 @@ export default function ExportTool({ relayUrl = '', baseUrl, defaultPreset = 'ar
         <form onSubmit={(e) => { e.preventDefault(); start(false); }} noValidate>
           <fieldset class="ticks">
             <legend class="label-text">Where is your Quip?</legend>
-            <div class="ticks__row">
+            <div class="ticks__row seg">
               <label class="tick"><input type="radio" name="host" checked={hostChoice === 'quip.com'} onChange={() => setHostChoice('quip.com')} /> quip.com</label>
               <label class="tick"><input type="radio" name="host" checked={hostChoice === 'custom'} onChange={() => setHostChoice('custom')} /> Company domain</label>
             </div>

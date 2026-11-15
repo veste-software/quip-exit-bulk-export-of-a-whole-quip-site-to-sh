@@ -64,7 +64,7 @@ Each page uses `Base.astro`, links to the tool (`url('')#tool`), and is written 
 - Not verifiable without a browser: the above-the-fold fit at 1280×800 and 390×844, the 360 px styleguide, and the keyboard-only pass. The code for them is in (labels, aria-live, focus to the result head, responsive grids), but QA or a human must look.
 - ZIP parts are built in memory per part, not streamed to disk.
 - `PUBLIC_RELAY_URL` is the relay address. Without it the real-token path shows an honest notice and only the sample site works. Worker secrets are listed in `.env.example`.
-- The mobile header still shows all three links (DESIGN.md asks for one under 480 px).
+- The mobile header shows only Pricing under 480 px (Deadlines is in the footer).
 - Home-page resume uses the newest unfinished run for the same host, user and preset; it re-runs the dry run first (about 30 requests per 100 documents).
 
 ## Visual review round 1
@@ -83,11 +83,11 @@ A designer who looked at the real pages said: The front page is not finished.
 
 A designer who looked at the real pages said: This looks like a real, carefully made Quip export tool with its own cardboard-box style, but on my phone I have to scroll to find the button.
 
-- [ ] [Visual round 2] Mobile 390x844: the red 'Count my documents – free' button ends at about 950 px, below the fold. Under 480 px make the header a single 64 px row with the mark, the wordmark and only the 'Pricing' link (hide Security and Deadlines there), and add 'Deadlines' to the footer nav, which currently lacks …
-- [ ] [Visual round 2] Mobile 390x844: under 480 px put the two host choices (quip.com / Company domain) side by side in two equal 52 px columns, and shorten the kicker to 'QUIP SITE EXPORT · IN YOUR BROWSER' so it fits on one line. Together with the header fix, the whole button must sit above 844 px. Check this with a 3…
-- [ ] [Visual round 2] Footer: remove the empty band of about 64 px between the corrugated edge and the dashed footer line so the page ends with one divider. Drop margin-top on .site-footer when it follows hr.corrugated, or drop the perforated border on pages that end with the corrugated edge.
-- [ ] [Visual round 2] 'What is in the carton': spot-comments and spot-links sit at the top of the right column, next to the folders/ and .xlsx rows. Place spot-comments level with the comments.csv row and spot-links level with the link-map.csv row (or stack both at the bottom of the column, aligned with the table's last…
-- [ ] [Visual round 2] 'Where is your Quip?' is a pick-one question drawn as two square tick boxes, which reads as 'pick both'. Draw it as a two-part segmented control with square corners: the selected half filled carbon with label-stock text and the green tick, the other half label stock. Keep role=radiogroup and arrow-…
-- [ ] [Visual round 2] Hero: the tape roll between the two cartons is a small ring that reads as a loose wheel. Make it about twice as large and draw a strip of tape-brown tape running from it to the sealed carton's top seam, so open → taped → sealed reads at a glance.
-- [ ] [Visual round 2] Mobile steps: each step picture is about 280 px tall, so the three steps take about 1,250 px. Under 48rem cap the step pictures at 200 px wide, centred, with 16 px under them.
-- [ ] [Visual round 2] Footer disclaimer is 15 px: set .disclaimer to var(--small) (17 px), as the type scale requires.
+- [x] [Visual round 2] Mobile 390x844: the red 'Count my documents – free' button ends at about 950 px, below the fold. Under 480 px make the header a single 64 px row with the mark, the wordmark and only the 'Pricing' link (hide Security and Deadlines there), and add 'Deadlines' to the footer nav, which currently lacks …
+- [x] [Visual round 2] Mobile 390x844: under 480 px put the two host choices (quip.com / Company domain) side by side in two equal 52 px columns, and shorten the kicker to 'QUIP SITE EXPORT · IN YOUR BROWSER' so it fits on one line. Together with the header fix, the whole button must sit above 844 px. Check this with a 3…
+- [x] [Visual round 2] Footer: remove the empty band of about 64 px between the corrugated edge and the dashed footer line so the page ends with one divider. Drop margin-top on .site-footer when it follows hr.corrugated, or drop the perforated border on pages that end with the corrugated edge.
+- [x] [Visual round 2] 'What is in the carton': spot-comments and spot-links sit at the top of the right column, next to the folders/ and .xlsx rows. Place spot-comments level with the comments.csv row and spot-links level with the link-map.csv row (or stack both at the bottom of the column, aligned with the table's last…
+- [x] [Visual round 2] 'Where is your Quip?' is a pick-one question drawn as two square tick boxes, which reads as 'pick both'. Draw it as a two-part segmented control with square corners: the selected half filled carbon with label-stock text and the green tick, the other half label stock. Keep role=radiogroup and arrow-…
+- [x] [Visual round 2] Hero: the tape roll between the two cartons is a small ring that reads as a loose wheel. Make it about twice as large and draw a strip of tape-brown tape running from it to the sealed carton's top seam, so open → taped → sealed reads at a glance.
+- [x] [Visual round 2] Mobile steps: each step picture is about 280 px tall, so the three steps take about 1,250 px. Under 48rem cap the step pictures at 200 px wide, centred, with 16 px under them.
+- [x] [Visual round 2] Footer disclaimer is 15 px: set .disclaimer to var(--small) (17 px), as the type scale requires.
