@@ -11,7 +11,7 @@ import { url } from '../lib/url';
 >
   <h2>Where the token lives</h2>
   <p>
-    You paste a personal access token into the form. The page keeps it in memory, in the running tab, and nowhere else. It is not written to a cookie, to local storage, to IndexedDB, to the ZIP file or to the web address. The one optional exception is resume: if you ask for it, the token can be kept in session storage, which the browser deletes when the tab closes. Closing the tab ends everything.
+    You paste a personal access token into the form. The page keeps it in memory, in the running tab, and nowhere else. It is not written to a cookie, to local storage, to IndexedDB, to the ZIP file or to the web address. Closing the tab ends everything.
   </p>
   <p>
     The token is sent only in the <code>Authorization</code> header of requests to Quip, never as part of an address, because addresses end up in logs. A token sees only what its owner can see: documents in folders your account has no access to are not exported, and the dry run counts will show that.

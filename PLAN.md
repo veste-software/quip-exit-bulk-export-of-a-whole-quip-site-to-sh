@@ -94,4 +94,4 @@ A designer who looked at the real pages said: This looks like a real, carefully 
 
 ## QA round 2
 
-- [ ] [QA round 2] The security page says the Quip token can optionally be kept in session storage for resume. No code does this; the token is memory only. Delete the sentence 'The one optional exception is resume: if … (src/pages/security.astro:14)
+- [x] [QA round 2] The security page says the Quip token can optionally be kept in session storage for resume. No code does this; the token is memory only. Delete the sentence 'The one optional exception is resume: if … (src/pages/security.astro:14)
