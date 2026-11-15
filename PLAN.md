@@ -91,3 +91,7 @@ A designer who looked at the real pages said: This looks like a real, carefully 
 - [x] [Visual round 2] Hero: the tape roll between the two cartons is a small ring that reads as a loose wheel. Make it about twice as large and draw a strip of tape-brown tape running from it to the sealed carton's top seam, so open → taped → sealed reads at a glance.
 - [x] [Visual round 2] Mobile steps: each step picture is about 280 px tall, so the three steps take about 1,250 px. Under 48rem cap the step pictures at 200 px wide, centred, with 16 px under them.
 - [x] [Visual round 2] Footer disclaimer is 15 px: set .disclaimer to var(--small) (17 px), as the type scale requires.
+
+## QA round 2
+
+- [ ] [QA round 2] The security page says the Quip token can optionally be kept in session storage for resume. No code does this; the token is memory only. Delete the sentence 'The one optional exception is resume: if … (src/pages/security.astro:14)
