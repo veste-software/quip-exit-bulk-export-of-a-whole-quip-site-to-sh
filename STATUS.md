@@ -1,6 +1,6 @@
 # Quip Exit: bulk export of a whole Quip site to SharePoint, Google Drive or Notion, with folders, co…
 
-**Stage:** qa · **Platform:** web · **Score:** 3.1/5 · **Spend:** $11.55
+**Stage:** staging · **Platform:** web · **Score:** 3.1/5 · **Spend:** $11.65
 
 For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: paste a Quip API token and pick folders. Documents become DOCX, HTML or Markdown and spreadsheets become XLSX; the folder tree is rebuilt, inline comments are saved and internal Quip links are rewritten to the new paths, ready for SharePoint, Google Drive or Notion. If it takes off, it becomes the reference 'leaving Quip' site, and the same export engine serves the next document-tool retirement.
 
@@ -8,6 +8,7 @@ For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: past
 
 ## Needs you
 
+- [ ] Review the staging build, then launch with `npm run studio -- approve quip-exit-bulk-export-of-a-whole-quip-site-to-sh`
 - [ ] [task 1] Pick the brand name and buy the domain (do not start the name with 'Quip')
 - [ ] [task 2] Create the Stripe account and the two products (149 EUR, 390 EUR), turn on tax ID collection and invoices, and add the live keys as STRIPE_SECRET_KEY, STRIPE_PRICE_SITE and STRIPE_PRICE_LARGE when going live
 - [ ] [task 3] Deploy the Cloudflare Worker relay and the static site, and set LICENSE_SIGNING_SECRET and QUIP_HOST_ALLOWLIST
@@ -36,6 +37,11 @@ For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: past
 - [ ] [task 26] Set ALLOWED_ORIGIN, STRIPE_SECRET_KEY, STRIPE_PRICE_SITE, STRIPE_PRICE_LARGE and LICENCE_SECRET (the name the code reads) on the Cloudflare Worker; keep Stripe in test mode until going live
 - [ ] [task 27] Pick the final brand name and domain, then add a repository URL for the relay source link on /security
 - [ ] [task 28] Remove the 'test mode' sentence from /pricing when payments go live
+- [ ] [task 29] Decide whether to upgrade astro and @astrojs/preact to clear the npm audit findings, then re-run test, build, build:preview, check:dist and design-check.
+- [ ] [task 30] Create a Stripe account, add the live key and webhook secret, and set LICENCE_SECRET (the name the code uses) before going live; test mode only until then.
+- [ ] [task 31] Set ALLOWED_ORIGIN on the Cloudflare relay and deploy it; set PUBLIC_CF_ANALYTICS_TOKEN if cookie-free analytics is wanted.
+- [ ] [task 32] Run the exporter once against a real Quip site and test the Notion import and the SharePoint .url shortcuts.
+- [ ] [task 33] Pick the final brand name (it must not start with Quip).
 
 ## Recommendation
 
@@ -85,7 +91,6 @@ one-off (Free: unlimited dry run plus export of up to 20 documents. Site pass 14
 
 ## History
 
-- 2026-11-15 15:43 · planned · scaffold and plan written
 - 2026-11-15 16:15 · building · build started
 - 2026-11-15 16:15 · seo · all planned tasks done
 - 2026-11-15 16:21 · qa · seo and conversion foundations written
@@ -97,3 +102,4 @@ one-off (Free: unlimited dry run plus export of up to 20 documents. Site pass 14
 - 2026-11-15 17:00 · qa · all planned tasks done
 - 2026-11-15 17:06 · building · QA round 2 found 1 blocker(s)
 - 2026-11-15 17:12 · qa · all planned tasks done
+- 2026-11-15 17:17 · staging · QA passed
