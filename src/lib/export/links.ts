@@ -27,7 +27,7 @@ export interface LinkRow {
   source_path: string;
   old_url: string;
   new_path: string;
-  status: 'rewritten' | 'unresolved';
+  status: 'resolved' | 'unresolved';
 }
 
 const anchorOf = (suffix: string) => {
@@ -53,7 +53,7 @@ export function rewriteLinks(
       return whole;
     }
     const rel = relativePath(source.path, target).split('/').map(encodeURIComponent).join('/') + anchorOf(suffix ?? '');
-    rows.push({ source_thread_id: source.id, source_path: source.path, old_url: old, new_path: rel, status: 'rewritten' });
+    rows.push({ source_thread_id: source.id, source_path: source.path, old_url: old, new_path: rel, status: 'resolved' });
     return `href=${q}${rel}${q}`;
   });
   return { html: out, rows };

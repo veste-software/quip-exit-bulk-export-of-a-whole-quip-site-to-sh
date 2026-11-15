@@ -104,7 +104,7 @@ describe('paths and links', () => {
     const map = new Map(inv.threads.map((t) => [t.id, `Private/${t.title}.html`]));
     const t = inv.threads.find((x) => x.id === 'DOC00000001')!;
     const out = rewriteLinks(t.html, 'quip.com', { id: t.id, path: 'Private/Onboarding guide.html' }, map);
-    expect(out.rows.filter((r) => r.status === 'rewritten')).toHaveLength(3);
+    expect(out.rows.filter((r) => r.status === 'resolved')).toHaveLength(3);
     expect(out.rows.filter((r) => r.status === 'unresolved')).toHaveLength(1);
     expect(out.html).not.toContain('quip.com/DOC');
     expect(out.html).toContain('#plan');

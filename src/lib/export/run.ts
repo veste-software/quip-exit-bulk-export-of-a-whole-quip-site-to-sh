@@ -190,7 +190,7 @@ export async function runExport(o: RunOptions): Promise<RunResult> {
   const stats = {
     documents: rows.filter((r) => r.status === 'ok').length,
     comments: allComments.length,
-    linksRewritten: allLinks.filter((l) => l.status === 'rewritten').length,
+    linksRewritten: allLinks.filter((l) => l.status === 'resolved').length,
     linksUnresolved: allLinks.filter((l) => l.status === 'unresolved').length,
   };
   writer.add('manifest.csv', manifestCsv(rows));

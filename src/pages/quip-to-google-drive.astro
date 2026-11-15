@@ -30,7 +30,7 @@ import { url } from '../lib/url';
 
   <h2>What happens to links</h2>
   <p>
-    Links between Quip documents point at your Quip site. In the Word and Excel files they are left exactly as they were, because rewriting them to Drive addresses is impossible until the files exist in Drive and have their own addresses. That is what <code>link-map.csv</code> is for. It has one row for every link found: the document it sits in, the old Quip address, where the target ended up inside the ZIP, and a status of <code>rewritten</code> or <code>unresolved</code>.
+    Links between Quip documents point at your Quip site. In the Word and Excel files they are left exactly as they were, because rewriting them to Drive addresses is impossible until the files exist in Drive and have their own addresses. That is what <code>link-map.csv</code> is for. It has one row for every link found: the document it sits in, the old Quip address, where the target ended up inside the ZIP, and a status of <code>resolved</code> or <code>unresolved</code>.
   </p>
   <p>
     After the upload, you can use the map in two ways. For a handful of important documents, open them and replace the links by hand, using the new paths to find the target. For a larger site, sort the sheet by source document, work through the busiest ones first, and leave the rest until someone opens them and finds a dead link.

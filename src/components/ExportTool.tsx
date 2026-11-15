@@ -67,6 +67,7 @@ export default function ExportTool({ relayUrl = '', baseUrl, defaultPreset = 'ar
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const [result, setResult] = useState<{ urls: { name: string; url: string; size: number }[]; stats: { documents: number; comments: number; linksRewritten: number } } | null>(null);
   const [cap, setCap] = useState(FREE_CAP);
+  const [paidNotice, setPaidNotice] = useState(false);
   const [resumeFrom, setResumeFrom] = useState<number | null>(null);
   const abort = useRef<AbortController | null>(null);
   const headRef = useRef<HTMLDivElement>(null);
@@ -82,7 +83,7 @@ export default function ExportTool({ relayUrl = '', baseUrl, defaultPreset = 'ar
   useEffect(() => {
     const sid = new URLSearchParams(location.search).get('session_id');
     if (sid && relayUrl) {
-      fetchLicence(relayUrl, sid).then((l) => { saveLicence(l); history.replaceState(null, '', location.pathname); }).catch((e) => { setError(errorMessage(e)); setPhase('error'); });
+      fetchLicence(relayUrl, sid).then((l) => { saveLicence(l); setPaidNotice(true); history.replaceState(null, '', location.pathname); }).catch((e) => { setError(errorMessage(e)); setPhase('error'); });
     }
   }, []);
 
@@ -228,6 +229,12 @@ export default function ExportTool({ relayUrl = '', baseUrl, defaultPreset = 'ar
         {inv && phase !== 'form' && phase !== 'error' && <span class="label-text num">{consignment(inv.userId + inv.host)}</span>}
       </div>
 
+      {phase === 'form' && paidNotice && (
+        <div class="notice" role="status">
+          <span class="label-text notice__tag">Payment received</span>
+          <p>Your licence is active in this tab. The page reloaded, so the token and the document list were cleared: paste your Quip token again and run the dry run once more, then export everything.</p>
+        </div>
+      )}
       {phase === 'form' && (
         <form onSubmit={(e) => { e.preventDefault(); start(false); }} noValidate>
           <fieldset class="ticks">
