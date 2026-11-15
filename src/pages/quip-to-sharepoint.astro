@@ -1,0 +1,59 @@
+---
+import Page from '../layouts/Page.astro';
+import ExportTool from '../components/ExportTool';
+import { url } from '../lib/url';
+const relayUrl = import.meta.env.PUBLIC_RELAY_URL ?? '';
+---
+<Page
+  title="Quip to SharePoint: export a whole site with folders, comments and links | Packout"
+  description="Move a Quip site into a SharePoint document library: one ZIP with the folder tree, DOCX and XLSX files, shortcuts for documents in two folders, and a link map for fixing links."
+  kicker="Quip to SharePoint · import guide"
+  heading="Quip to SharePoint, folder by folder"
+  lead="The SharePoint preset builds one ZIP that mirrors your Quip folders, so a synced document library can take it in one copy."
+>
+  <div class="wide" style="margin-bottom: var(--s6)">
+    <ExportTool client:load relayUrl={relayUrl} baseUrl={url('')} defaultPreset="sharepoint" />
+  </div>
+
+  <h2>What the SharePoint preset puts in the ZIP</h2>
+  <p>
+    Every Quip folder becomes a real folder. Every document becomes a Word file and every spreadsheet an Excel file, named after its title, with characters that SharePoint rejects (such as the colon, the asterisk and the question mark) replaced by spaces. Two documents with the same title in one folder get “(2)” added, so nothing overwrites anything.
+  </p>
+  <p>
+    The HTML copy of each document, with its comments and images, is kept apart in a folder called <code>_archive</code>. You do not have to upload it, but it is the only place where comments sit inline next to the text and where links between documents are already rewritten to relative paths. The Word files carry the comments too: they are appended under a “Comments” heading at the end of the document, each with author and time.
+  </p>
+
+  <h2>Importing through a synced document library</h2>
+  <ol>
+    <li>Unzip the file on a disk with enough room. The ZIP is split into parts of about 1 GB if the site is large; unzip all parts into the same folder.</li>
+    <li>In SharePoint, open the target document library and choose Sync, so that it appears in File Explorer.</li>
+    <li>Copy the unzipped folders into the synced library folder. Leave out <code>_archive</code> if you only want the Word and Excel files.</li>
+    <li>Wait for the sync icon to finish. Long paths are the usual cause of errors: SharePoint limits the full path, so a deeply nested Quip folder may need a shorter top-level name.</li>
+    <li>Keep <code>manifest.csv</code>. It lists every document, where it went and its status, so you can check the library against it.</li>
+  </ol>
+
+  <h2>Documents that live in two folders</h2>
+  <p>
+    Quip lets one document sit in several folders. A file system does not. The preset stores the document once, in the first folder the crawl met it in, and writes a small <code>.url</code> shortcut with the same name into every other folder. The shortcut points at the stored copy by a relative path. The manifest lists both locations in the columns <code>primary_path</code> and <code>other_paths</code>, so you can decide later whether to keep a shortcut or make a real copy.
+  </p>
+
+  <h2>Links between documents</h2>
+  <p>
+    Quip documents link to each other by address on your Quip site. Left alone, those links keep pointing at Quip, which becomes read-only and later disappears. Inside the <code>_archive</code> pages Packout rewrites every link to a document it exported into a relative path, and keeps the part after a <code>#</code> so section links still work. A link to something outside the export, for example a document the token could not see, is left as it was and marked <code>unresolved</code>.
+  </p>
+  <p>
+    The Word and Excel files are not edited this way. For those, <code>link-map.csv</code> is the tool: one row per link with the source document, the old address, the new path and the status. Sort it by status, fix the unresolved rows by hand, and use the new paths to update links in the files that matter most.
+  </p>
+
+  <h2>What to check afterwards</h2>
+  <ul>
+    <li>Open <code>index.html</code> from the ZIP: it lists every item with a link and a tick box for your own review.</li>
+    <li>Compare the document count in <code>manifest.csv</code> with the count the free dry run showed.</li>
+    <li>Look at the comment counts. A document with comments in Quip should have the same number in the manifest.</li>
+    <li>Search <code>link-map.csv</code> for <code>unresolved</code> and decide what to do with each one.</li>
+  </ul>
+  <p>
+    The free dry run counts everything before anything is downloaded, and up to 20 documents can be exported for nothing. <a href={url('pricing/')}>Pricing</a> covers the rest, and <a href={url('security/')}>security</a> explains where your token goes.
+  </p>
+  <p><img src={url('art/spot-links.svg')} width="480" height="360" alt="Two documents tied together by a string with a tag on it" loading="lazy" style="max-width: 20rem" /></p>
+</Page>

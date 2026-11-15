@@ -1,0 +1,43 @@
+---
+import Page from '../layouts/Page.astro';
+import TimelineCalc from '../components/TimelineCalc';
+import { url } from '../lib/url';
+---
+<Page
+  title="Quip retirement timeline: when does your Quip data disappear? | Packout"
+  description="Salesforce is retiring Quip: no renewals after 1 March 2027, then 90 days read-only, 90 days with logins blocked, then deletion. Enter your term end to get your own dates."
+  kicker="Quip end of life · deadlines"
+  heading="When your Quip data goes"
+  lead="Enter the date your Quip term ends and get the three dates that matter after it. The rules come from Salesforce’s announcement as reported on 4 March 2026."
+>
+  <div class="wide"><TimelineCalc client:load /></div>
+
+  <h2>The rules</h2>
+  <p>
+    Salesforce announced that all Quip products are retiring and that subscriptions cannot be renewed after 1 March 2027. When your term ends, the site stays readable but becomes read-only for 90 days. After that, logins are blocked for another 90 days. Deletion then happens over about 30 more days. The calculator above adds 90, 180 and about 210 days to the date you enter. The last figure is approximate, because the sources describe the deletion as taking about a month.
+  </p>
+  <p>
+    Your own deadline is therefore your term end plus 90 days, not 1 March 2027. A subscription renewed shortly before the cutoff can run well into 2028. If you are not sure when your term ends, ask your Salesforce account owner or look at the order form; do not guess.
+  </p>
+
+  <h2>What happened and when</h2>
+  <ol>
+    <li><strong>4 March 2026:</strong> SalesforceBen reports the end of life, the renewal cutoff on 1 March 2027 and the 90 / 90 / about 30 day sequence. It also notes that Salesforce plans export tools for other third-party applications and a Slack canvas flow. <a href="https://www.salesforceben.com/salesforce-announces-end-of-life-for-quip/">SalesforceBen article</a>.</li>
+    <li><strong>29 July 2026:</strong> the only 2026 entry in the <a href="https://quip.com/release-notes">Quip release notes</a> is a one-click migration from Quip to Slack canvases. It has no entry for a bulk export.</li>
+    <li><strong>28 August 2026:</strong> ONLYOFFICE publishes a migration guide that says there is no one-click workspace export, no admin toggle and no single ZIP, and that the Bulk Export API can include conversations in DOCX and XLSX. <a href="https://www.onlyoffice.com/blog/2026/08/how-to-migrate-from-quip-before-its-2027-retirement">ONLYOFFICE guide</a>.</li>
+  </ol>
+
+  <h2>Working backwards from the date</h2>
+  <p>
+    Exporting is not instant. Quip allows about 750 requests an hour per token, and a document costs several requests: its export, its comments and each image. A site of 1,200 documents takes a few hours; a site of 15,000 takes days. Add the time to check the result and to import it. A sensible plan is to run a free dry run now, to know the size, and to export well before the read-only period ends, so that a failure still leaves room to try again.
+  </p>
+  <ul>
+    <li>Run the dry run today. It counts everything and downloads nothing.</li>
+    <li>Pick the destination, and read the guide for <a href={url('quip-to-sharepoint/')}>SharePoint</a>, <a href={url('quip-to-google-drive/')}>Google Drive</a> or <a href={url('quip-to-notion/')}>Notion</a>.</li>
+    <li>Export, check <code>manifest.csv</code> against the dry-run count, and keep the ZIP somewhere safe.</li>
+    <li>Delete your access token on your Quip site when you are done.</li>
+  </ul>
+  <p>
+    The relay that this tool uses is switched off on 30 June 2028, after the last deletion windows have closed. <a href={`${url('')}#tool`}>Count my documents</a>, free.
+  </p>
+</Page>

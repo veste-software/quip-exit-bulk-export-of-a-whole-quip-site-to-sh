@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import Barcode from '../components/Barcode.astro';
+---
+<Base title="Styleguide | Packout" description="Internal styleguide of the Packout components." noindex>
+  <div class="wrap" style="padding-block: var(--s6)">
+    <h1>Styleguide</h1>
+
+    <h2>Buttons</h2>
+    <p style="display:flex; gap:var(--s2); flex-wrap:wrap">
+      <button class="btn" type="button">Count my documents – free</button>
+      <button class="btn btn--secondary" type="button">Export 20 for free</button>
+      <button class="btn" type="button" disabled>Disabled</button>
+      <button class="linklike" type="button">Text action</button>
+    </p>
+
+    <h2>Inputs and token slot</h2>
+    <div class="field" style="max-width: 28rem">
+      <label class="label-text field__label" for="sg-a">Personal access token</label>
+      <div class="slot"><div class="input-row"><input id="sg-a" class="input" type="password" value="secret" /><button class="toggle" type="button">Show</button></div></div>
+      <p class="field__help">Help text, faded carbon.</p>
+    </div>
+    <div class="field" style="max-width: 28rem">
+      <label class="label-text field__label" for="sg-b">Filled slot</label>
+      <div class="slot is-filled"><input id="sg-b" class="input" type="text" value="abcdefgh" /></div>
+    </div>
+    <div class="field" style="max-width: 28rem">
+      <label class="label-text field__label" for="sg-c">Error state</label>
+      <input id="sg-c" class="input" type="text" aria-invalid="true" aria-describedby="sg-c-err" />
+      <p class="field__error" id="sg-c-err">Paste your personal access token first.</p>
+    </div>
+
+    <h2>Tick boxes</h2>
+    <fieldset class="ticks" style="max-width: 36rem">
+      <legend class="label-text">Shape it for</legend>
+      <div class="ticks__row">
+        <label class="tick"><input type="radio" name="sg" checked /> SharePoint</label>
+        <label class="tick"><input type="radio" name="sg" /> Google Drive</label>
+        <label class="tick"><input type="checkbox" /> Unchecked box</label>
+      </div>
+    </fieldset>
+
+    <h2>Notices</h2>
+    <div class="notice"><span class="label-text notice__tag">Note</span><p>Nothing is downloaded yet.</p></div>
+    <div class="notice"><span class="label-text notice__tag">Delayed</span><p>Quip is throttling. Waiting 2 minutes.</p></div>
+    <div class="notice notice--stopped"><span class="label-text notice__tag">Stopped</span><p>Quip refused the token (401).</p></div>
+    <div class="notice notice--done"><span class="label-text notice__tag">Done</span><p>1,204 documents packed.</p></div>
+
+    <h2>Ledger</h2>
+    <table class="ledger" style="max-width: 36rem">
+      <thead><tr><th>Document</th><th class="num">Comments</th></tr></thead>
+      <tbody><tr><td>Onboarding guide</td><td class="num">120</td></tr><tr><td>Quarterly plan</td><td class="num">0</td></tr></tbody>
+    </table>
+
+    <h2>Waybill, progress, stamp</h2>
+    <div class="label" style="max-width: 32rem; margin-top: var(--s4)">
+      <div class="label__head"><span class="label-text">From quip.com · To SharePoint</span><span class="label-text num">PKO-4F2-81C</span></div>
+      <div class="waybill__counts">
+        <span class="sticker">Fragile: comments inside</span>
+        <div class="count-cell"><div class="count">4</div><div class="label-text faded">Folders</div></div>
+        <div class="count-cell"><div class="count">12</div><div class="label-text faded">Documents</div></div>
+        <div class="count-cell"><div class="count">120</div><div class="label-text faded">Comments</div></div>
+      </div>
+      <Barcode seed="PKO-4F2-81C" />
+      <hr class="perf" />
+      <div class="tape-progress"><div class="tape-progress__bar" style="--progress: 40%"></div></div>
+      <p class="tape-progress__print label-text">Taped <span class="num">6</span> / <span class="num">15</span></p>
+      <p><span class="stamp">Packed</span></p>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,60 @@
+---
+import Page from '../layouts/Page.astro';
+import { url } from '../lib/url';
+import { buildMessages } from '../mock/fixtures';
+import { commentsHtml, commentRows, commentsCsv } from '../lib/export/comments';
+
+// Real output of the export code, run at build time on SYNTHETIC sample comments.
+const sample = buildMessages('DOC00000001', 120).slice(-3);
+const htmlSnippet = commentsHtml(sample).replace(/<li>/g, '\n  <li>').replace(/<\/ol>/, '\n</ol>').replace('<ol>', '<ol>');
+const csvSnippet = commentsCsv(commentRows({ id: 'DOC00000001', title: 'Onboarding guide' }, sample));
+---
+<Page
+  title="Export Quip documents with their comments | Packout"
+  description="Quip's File > Export drops comments. Packout keeps them three ways: inline in the HTML, appended to the Word file, and as one row each in comments.csv. Sample output shown."
+  kicker="Quip comments · what survives an export"
+  heading="Export Quip with the comments"
+  lead="Comments are where decisions were made. Quip’s built-in export leaves them behind; this export keeps every one."
+>
+  <p><a class="btn" href={`${url('')}#tool`}>Count my documents – free</a></p>
+
+  <h2>Why File &gt; Export drops comments</h2>
+  <p>
+    Quip’s built-in export works on one document at a time, and the file it produces contains the document body only. The conversation that happened beside the text, who asked what and who answered, stays in Quip. The free open-source exporters have the same gap for Word files: one of them keeps comments in its HTML output but not in the DOCX. When Quip goes read-only and then disappears, those conversations go with it, unless they were copied out first.
+  </p>
+
+  <h2>The three places comments end up</h2>
+  <h3>1. Inline in the HTML copy</h3>
+  <p>
+    Every exported document has an HTML version with a “Comments” section at the end. Each comment has its author, an ISO timestamp and its text. Text is escaped, so a comment that contains angle brackets cannot break the page. This is the real output of the export code for three sample comments:
+  </p>
+  <pre>{htmlSnippet}</pre>
+
+  <h3>2. Appended to the Word file</h3>
+  <p>
+    The DOCX that Quip generates is opened, and a “Comments” heading followed by one paragraph per comment is inserted before the end of the document body. Each paragraph reads like “Dana Example, 2025-01-06T10:00:00.000Z: the comment text”. The comments are in chronological order, oldest first, although Quip delivers them newest first. They are plain paragraphs, not Word comment balloons: Word’s own comment format needs a position in the text, which Quip’s export does not provide.
+  </p>
+
+  <h3>3. One row each in comments.csv</h3>
+  <p>
+    The file <code>comments.csv</code> has one row per comment across the whole site, which makes it the easiest place to search, filter by author or hand to a lawyer. The columns are <code>thread_id</code>, <code>thread_title</code>, <code>comment_id</code>, <code>author</code>, <code>created_at</code> and <code>text</code>, quoted according to RFC 4180 so commas and line breaks inside comments do not shift the columns:
+  </p>
+  <pre>{csvSnippet}</pre>
+
+  <h2>Checking that none went missing</h2>
+  <p>
+    The free dry run counts comments before anything is downloaded. On a site of more than 50 documents it counts the first 50 and labels the number “sampled”, to stay inside Quip’s request limits. After the export, <code>manifest.csv</code> has a <code>comment_count</code> for every document, and the total of that column should equal the number of rows in <code>comments.csv</code>. A document with 120 comments needs two requests to Quip, because they arrive 100 at a time, and Packout follows the cursor until the last page.
+  </p>
+
+  <h2>Which preset keeps what</h2>
+  <ul>
+    <li><strong>Archive:</strong> HTML with inline comments, Word file with appended comments, CSV.</li>
+    <li><strong>SharePoint:</strong> Word file with appended comments, HTML with inline comments in <code>_archive</code>, CSV.</li>
+    <li><strong>Google Drive:</strong> Word file with appended comments, CSV.</li>
+    <li><strong>Notion:</strong> comments at the end of each Markdown page, CSV.</li>
+  </ul>
+  <p>
+    Up to 20 documents can be exported free to see the result for yourself. <a href={url('pricing/')}>Pricing</a> for whole sites, and <a href={url('security/')}>security</a> for how your token is handled.
+  </p>
+  <p><img src={url('art/spot-comments.svg')} width="480" height="360" alt="A document with three red comment notes in the margin" loading="lazy" style="max-width: 20rem" /></p>
+</Page>

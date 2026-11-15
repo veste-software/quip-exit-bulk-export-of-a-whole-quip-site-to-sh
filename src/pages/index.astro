@@ -1,33 +1,100 @@
 ---
-// Scaffold home page. PLAN.md tasks replace the placeholder block below with the
-// <ExportTool client:load /> island (token field, host choice, "Free dry run").
 import Base from '../layouts/Base.astro';
-import Barcode from '../components/Barcode.astro';
+import ExportTool from '../components/ExportTool';
+import { url } from '../lib/url';
+import { FREE_CAP, TIERS, formatEur } from '../lib/pricing';
+
+const relayUrl = import.meta.env.PUBLIC_RELAY_URL ?? '';
+const site = TIERS[1];
 ---
 <Base
   title="Export a whole Quip site in one ZIP – folders, comments, working links | Packout"
   description="Bulk export for Quip sites in your browser: every folder, every comment and links between documents that still work, ready for SharePoint, Google Drive or Notion. Free dry run."
 >
-  <section class="wrap hero">
-    <div class="hero-copy">
-      <p class="label-text">Bulk export for Quip sites · nothing to install</p>
-      <h1>Pack up your whole Quip site</h1>
+  <div class="wrap first-screen">
+    <div class="first-screen__copy">
+      <p class="label-text kicker">Bulk export for Quip sites · runs in your browser</p>
+      <h1>Export your whole Quip site</h1>
       <p class="lead">
-        One ZIP with your folders, every comment and links between documents that still work,
-        shaped for SharePoint, Google Drive or Notion, with a manifest that proves nothing was left behind.
+        One ZIP with every folder, every comment and links between documents that still work.
+        Ready for SharePoint, Google Drive or Notion.
       </p>
     </div>
-    <div class="ticket" id="tool">
-      <p class="label-text">Consignment · dry run</p>
-      <p>The export tool loads here.</p>
-      <Barcode seed="PKO-000-000" />
+    <div class="first-screen__tool">
+      <ExportTool client:load relayUrl={relayUrl} baseUrl={url('')} />
     </div>
-  </section>
-</Base>
+    <div class="first-screen__art">
+      <img class="art" src={url('art/hero.svg')} width="1200" height="720" alt="A carton being filled with folders and documents, sealed with packing tape and labelled" />
+    </div>
+  </div>
 
-<style>
-  .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--s6); padding-block: var(--s6); align-items: start; }
-  .lead { font-size: var(--step-1); line-height: 1.4; }
-  .ticket { background: var(--label); border: var(--rule); box-shadow: var(--shadow-label); padding: var(--s3); }
-  @media (max-width: 56rem) { .hero { grid-template-columns: 1fr; gap: var(--s3); padding-block: var(--s3); } }
-</style>
+  <div class="wrap">
+    <ol class="steps">
+      <li>
+        <img src={url('art/spot-1.svg')} width="480" height="360" alt="" loading="lazy" />
+        <p class="label-text faded">Step 1</p>
+        <h3>Copy your token</h3>
+        <p>A personal access token from your Quip site. It stays in this tab.</p>
+      </li>
+      <li>
+        <img src={url('art/spot-2.svg')} width="480" height="360" alt="" loading="lazy" />
+        <p class="label-text faded">Step 2</p>
+        <h3>Free dry run: count everything</h3>
+        <p>Folders, documents, comments and links, counted before anything is downloaded.</p>
+      </li>
+      <li>
+        <img src={url('art/spot-3.svg')} width="480" height="360" alt="" loading="lazy" />
+        <p class="label-text faded">Step 3</p>
+        <h3>Download one ZIP</h3>
+        <p>Shaped for the place it is going, with a manifest that lists every document.</p>
+      </li>
+    </ol>
+  </div>
+
+  <div class="wrap section">
+    <h2>What is in the carton</h2>
+    <div class="ledger-wrap">
+      <div class="ledger-panel">
+        <table class="ledger">
+          <caption class="label-text">Contents of the ZIP</caption>
+          <thead><tr><th scope="col">File</th><th scope="col">What it is</th></tr></thead>
+          <tbody>
+            <tr><td><code>folders/</code></td><td>Your folder tree, one file per document. A document in two folders is stored once.</td></tr>
+            <tr><td><code>.html</code> + <code>.docx</code></td><td>Each document as a web page and as a Word file. Comments are added at the end of both.</td></tr>
+            <tr><td><code>.xlsx</code></td><td>Each spreadsheet as an Excel file.</td></tr>
+            <tr><td><code>index.html</code></td><td>An offline packing list with a link to every item.</td></tr>
+            <tr><td><code>manifest.csv</code></td><td>Every document, its path, owner, date and status. Your receipt.</td></tr>
+            <tr><td><code>link-map.csv</code></td><td>Every link between documents: the old address and where it points now.</td></tr>
+            <tr><td><code>comments.csv</code></td><td>Every comment with author and time. Quip’s own export leaves them out.</td></tr>
+            <tr><td><code>README.txt</code></td><td>Import steps for the place you chose.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ledger-art" aria-hidden="true">
+        <img src={url('art/spot-comments.svg')} width="480" height="360" alt="" loading="lazy" />
+        <img src={url('art/spot-links.svg')} width="480" height="360" alt="" loading="lazy" />
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap section">
+    <p class="lead">
+      Free for up to {FREE_CAP} documents. A whole site is {formatEur(site.priceEur ?? 0)} once (up to {site.cap.toLocaleString('en-GB')} documents).
+      <a href={url('pricing/')}>See pricing</a>.
+    </p>
+  </div>
+
+  <div class="wrap section">
+    <h2>Get your token</h2>
+    <div class="howto">
+      <img src={url('art/spot-1.svg')} width="480" height="360" alt="" loading="lazy" />
+      <ol>
+        <li>Open <span class="num">https://&lt;your site&gt;/dev/token</span> while signed in to Quip.</li>
+        <li>Generate a personal access token.</li>
+        <li>Copy it and paste it into the label above.</li>
+        <li>When the export is done, delete the token on the same page.</li>
+      </ol>
+    </div>
+  </div>
+  <hr class="corrugated" />
+</Base>

@@ -1,0 +1,49 @@
+---
+import Page from '../layouts/Page.astro';
+import { url } from '../lib/url';
+---
+<Page
+  title="Quip to Notion: export a whole site as Markdown with images and comments | Packout"
+  description="Move a Quip site into Notion: one ZIP of Markdown files with images beside them, relative links between pages, comments at the end of each page and a CSV of every comment."
+  kicker="Quip to Notion · import guide"
+  heading="Quip to Notion, as Markdown"
+  lead="The Notion preset converts every document to Markdown in your browser and keeps the folder tree, so Notion’s ZIP import can take it in one go."
+>
+  <p><a class="btn" href={`${url('')}#tool`}>Count my documents – free</a></p>
+
+  <h2>What the Notion preset produces</h2>
+  <p>
+    Each Quip document is converted from its HTML into a Markdown file with the title as a heading. Images are downloaded and stored in a folder beside the file, and the Markdown refers to them by relative path. Links between exported documents are rewritten to relative <code>.md</code> paths, keeping any section anchor. Spreadsheets cannot be expressed well in Markdown, so each one is delivered as an <code>.xlsx</code> file next to a Markdown copy of its table. There are no Word files in this preset.
+  </p>
+  <p>
+    Comments are written at the end of every page under a “Comments” heading, one entry per comment with author and time, and the same comments are listed in <code>comments.csv</code>. A document that lives in two folders is stored once, and the second folder gets a small Markdown page that links to it.
+  </p>
+
+  <h2>Importing the ZIP</h2>
+  <ol>
+    <li>Do not unzip the file. Notion’s importer reads the ZIP itself.</li>
+    <li>In Notion, open Settings, then Import, and choose the Text and Markdown option.</li>
+    <li>Select the ZIP. If the export came in several parts, import the parts one after another.</li>
+    <li>Wait until Notion reports that the import finished, then open a few pages from different folders and compare them with <code>index.html</code> from the export.</li>
+  </ol>
+
+  <h2>To be confirmed on a real Notion account</h2>
+  <p>
+    Two things have not been checked yet against a live Notion workspace, and we would rather say so than promise them. First, whether Notion turns relative links between Markdown files into links between its own pages. Notion’s documentation describes a Markdown import from a ZIP, but we have not verified how it treats a link from one imported file to another. Second, how Notion displays the folder tree: it may create pages for folders or flatten them. If links are not converted, <code>link-map.csv</code> lists every link with its old address and the new path, so you can repair the important ones.
+  </p>
+
+  <h2>What carries over and what does not</h2>
+  <ul>
+    <li><strong>Carries over:</strong> text, headings, lists, tables, images, the folder structure, the comment text with author and time.</li>
+    <li><strong>Changes shape:</strong> comments become plain text at the end of the page, not Notion comments attached to a passage. Spreadsheets become a Markdown table plus an <code>.xlsx</code> file.</li>
+    <li><strong>Does not carry over:</strong> slides and chats, which Quip’s API cannot export. They are listed in <code>manifest.csv</code> as <code>not_exportable</code>. Live apps and embedded content are not part of the HTML Quip provides.</li>
+  </ul>
+
+  <h2>How long it takes</h2>
+  <p>
+    Quip allows about 750 requests an hour per token, and each document needs several: its Word or Excel export, its comments, and one for each image. A site of 1,200 documents therefore takes a few hours. The free dry run shows an estimate for your site before anything is downloaded, and up to 20 documents are free. The export carries on after a pause or a closed tab, because each finished document is kept in your browser until the ZIP is built.
+  </p>
+  <p>
+    See <a href={url('pricing/')}>pricing</a> for the whole-site price, <a href={url('security/')}>security</a> for the token, and <a href={url('quip-export-comments/')}>comments</a> for what the comment output looks like.
+  </p>
+</Page>

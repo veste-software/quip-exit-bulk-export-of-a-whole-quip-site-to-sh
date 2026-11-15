@@ -6,13 +6,7 @@
   Flat colour only: no gradients, no blur, no soft shadows. Depth = hard offset, overlap, tape.
 */
 
-/* Self-hosted fonts (npm @fontsource). Never a CDN. */
-@import '@fontsource/big-shoulders-stencil-display/latin-800.css';
-@import '@fontsource/ibm-plex-sans/latin-400.css';
-@import '@fontsource/ibm-plex-sans/latin-400-italic.css';
-@import '@fontsource/ibm-plex-sans/latin-600.css';
-@import '@fontsource/ibm-plex-mono/latin-400.css';
-@import '@fontsource/ibm-plex-mono/latin-500.css';
+/* Self-hosted fonts (npm @fontsource) are imported in src/layouts/Base.astro. Never a CDN. */
 
 :root {
   /* ---- palette (exact values; see DESIGN.md for contrast pairs) ---- */

@@ -1,0 +1,63 @@
+---
+import Page from '../layouts/Page.astro';
+import { url } from '../lib/url';
+import { TIERS, formatEur, FREE_CAP } from '../lib/pricing';
+const [free, site, large] = TIERS;
+---
+<Page
+  title="Pricing: free dry run, 149 € for a whole Quip site | Packout"
+  description="Free dry run and 20 documents free. A whole Quip site up to 2,000 documents is 149 € once; up to 20,000 is 390 €. VAT invoice included. Refund if the export fails."
+  kicker="Pricing · pay once, no subscription"
+  heading="Pricing, stated once"
+  lead={`Counting is free. Up to ${FREE_CAP} documents are free. A whole site is a single payment, per site.`}
+>
+  <h2>The three tiers</h2>
+  <div class="ledger-panel wide">
+    <table class="ledger">
+      <caption class="label-text">One payment per Quip site</caption>
+      <thead><tr><th scope="col">Tier</th><th scope="col" class="num">Documents</th><th scope="col" class="num">Price</th></tr></thead>
+      <tbody>
+        <tr><td>{free.name}</td><td class="num">up to {free.cap}</td><td class="num">{formatEur(0)}</td></tr>
+        <tr><td>{site.name}</td><td class="num">up to {site.cap.toLocaleString('en-GB')}</td><td class="num">{formatEur(site.priceEur ?? 0)}</td></tr>
+        <tr><td>{large.name}</td><td class="num">up to {large.cap.toLocaleString('en-GB')}</td><td class="num">{formatEur(large.priceEur ?? 0)}</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Spreadsheets count as documents. Above 20,000 documents there is no single price: export the site in one pass per set of folders, and each pass is priced by its own count. The payment is tied to your Quip site and the account that owns the token, and the licence is valid for 90 days, so a failed run can be repeated.
+  </p>
+
+  <p>
+    There is no subscription and no renewal. Nothing is charged until you press the export button for a whole site and complete the Stripe payment, and the count you saw in the dry run decides the tier, so there is no surprise at the end. The free export of up to 20 documents needs no payment details, and you choose which 20 documents go into it.
+  </p>
+
+  <h2>What the free dry run shows</h2>
+  <p>
+    The dry run walks every folder your token can see and counts folders, documents, spreadsheets, links between documents, documents that live in more than one folder and comments. It estimates how long the export will take at Quip’s limit of about 750 requests an hour, and names the tier that applies. Nothing is downloaded. It costs you nothing, so run it before you decide anything.
+  </p>
+  <p><img src={url('art/spot-2.svg')} width="480" height="360" alt="A clipboard with an inventory: four rows ticked, one pending" loading="lazy" style="max-width: 20rem" /></p>
+
+  <h2>Compared with having it done for you</h2>
+  <p>
+    Migration agencies do this work by hand and quote per project. One of them, ClonePartner, states on its blog that its fixed price per project starts from $500 ({'2026-05-08'}; <a href="https://clonepartner.com/blog/quip-end-of-life-playbook-2027-choosing-your-migration-destination.md">source</a>), after a consultation, and the result is delivered in days. This tool is a self-service export. You run it yourself, in your browser, with no call and no wait, and it does not do the import into your destination: you follow the README in the ZIP for that.
+  </p>
+  <div class="ledger-panel wide">
+    <table class="ledger">
+      <caption class="label-text">Two ways to get the same files</caption>
+      <thead><tr><th scope="col"></th><th scope="col">Packout</th><th scope="col">Done for you</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Price</th><td class="num">{formatEur(site.priceEur ?? 0)} up to {site.cap.toLocaleString('en-GB')} documents</td><td>from $500 per project, per the vendor</td></tr>
+        <tr><th scope="row">Start</th><td>Now, in your browser</td><td>After a consultation</td></tr>
+        <tr><th scope="row">Import into the destination</th><td>You, with the README</td><td>Included, as the vendor describes it</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Payment, VAT and refunds</h2>
+  <p>
+    Payment runs through Stripe Checkout. You can enter a VAT identification number at checkout, and an invoice is created for the payment. Prices are shown in euro. If the export fails and we cannot fix it, you get your money back. A run that Quip itself blocks, for example by closing the site, is the same case. Until the owner has switched payments live, checkout only works in test mode.
+  </p>
+  <p>
+    Questions about the numbers? The <a href={url('security/')}>security page</a> explains what the relay can and cannot see, and the <a href={url('quip-retirement-timeline/')}>timeline</a> shows how much time you have. <a href={`${url('')}#tool`}>Count my documents</a>, free.
+  </p>
+</Page>

@@ -9,6 +9,8 @@
     "build:preview": "SITE_URL=https://example.github.io SITE_BASE=/preview astro build",
     "test": "vitest run",
     "design-check": "node scripts/design-check.mjs",
+    "check:dist": "node scripts/check-dist.mjs",
+    "size": "node scripts/js-size.mjs",
     "astro": "astro"
   },
   "dependencies": {

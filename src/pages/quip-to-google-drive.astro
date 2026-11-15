@@ -1,0 +1,49 @@
+---
+import Page from '../layouts/Page.astro';
+import { url } from '../lib/url';
+---
+<Page
+  title="Quip to Google Drive: export a whole site as Word and Excel files | Packout"
+  description="Move a Quip site into Google Drive: one ZIP of DOCX and XLSX files in your folder structure, comments appended, and a link map for repairing links between documents."
+  kicker="Quip to Google Drive · import guide"
+  heading="Quip to Google Drive, with the folders intact"
+  lead="The Drive preset gives you Word and Excel files in the same folder tree as Quip, plus the CSV files you need to fix links afterwards."
+>
+  <p><a class="btn" href={`${url('')}#tool`}>Count my documents – free</a></p>
+
+  <h2>What the Drive preset produces</h2>
+  <p>
+    Each Quip document becomes a <code>.docx</code> file and each spreadsheet an <code>.xlsx</code> file, stored in a folder tree that matches your Quip folders. File names are cleaned of characters that cause trouble when files move between systems, and duplicates in one folder get “(2)” added.
+  </p>
+  <p>
+    Comments are the part Quip’s own export loses. Packout appends every comment to the end of its Word file under a “Comments” heading, with author and time, and also writes all of them to <code>comments.csv</code>, one row per comment. A document that lives in two Quip folders is stored once; the manifest lists the second folder in <code>other_paths</code>, because Drive has no shortcut format that a ZIP can carry.
+  </p>
+
+  <h2>Uploading</h2>
+  <ol>
+    <li>Unzip the file. If the export came in several parts, unzip them all into one folder.</li>
+    <li>In Google Drive, choose New, then Folder upload, and select the unzipped folder.</li>
+    <li>Before you upload, open Drive settings and switch on the option to convert uploads to the Google Docs editor format. Without it, the files stay Word and Excel files and open in a preview or in Office mode.</li>
+    <li>Let the upload finish. Large uploads are safest from a desktop browser that stays open and on a wired connection.</li>
+    <li>Keep <code>manifest.csv</code> as your receipt: it lists every document and its status.</li>
+  </ol>
+
+  <h2>What happens to links</h2>
+  <p>
+    Links between Quip documents point at your Quip site. In the Word and Excel files they are left exactly as they were, because rewriting them to Drive addresses is impossible until the files exist in Drive and have their own addresses. That is what <code>link-map.csv</code> is for. It has one row for every link found: the document it sits in, the old Quip address, where the target ended up inside the ZIP, and a status of <code>rewritten</code> or <code>unresolved</code>.
+  </p>
+  <p>
+    After the upload, you can use the map in two ways. For a handful of important documents, open them and replace the links by hand, using the new paths to find the target. For a larger site, sort the sheet by source document, work through the busiest ones first, and leave the rest until someone opens them and finds a dead link.
+  </p>
+
+  <h2>What converts well and what does not</h2>
+  <p>
+    Text, headings, lists, tables and images come through the Word export. Spreadsheets keep their values; formulas and formatting depend on what Quip’s own spreadsheet export provides, so check a few important sheets. Slides and chats cannot be exported by Quip’s API; they are listed in the manifest as <code>not_exportable</code> with a placeholder file, so nothing disappears without a trace.
+  </p>
+
+  <h2>Before you start</h2>
+  <p>
+    Run the free dry run first. It counts folders, documents, spreadsheets, comments and links and tells you how long the export will take at Quip’s limit of about 750 requests an hour per token. Up to 20 documents can be exported free. See <a href={url('pricing/')}>pricing</a> for the whole-site price and <a href={url('security/')}>security</a> for how the token is handled. If you are not sure how much time you have, the <a href={url('quip-retirement-timeline/')}>retirement timeline</a> turns your term end into dates.
+  </p>
+  <p><img src={url('art/spot-links.svg')} width="480" height="360" alt="Two documents tied together by a string with a tag on it" loading="lazy" style="max-width: 20rem" /></p>
+</Page>

@@ -1,0 +1,11 @@
+name = "packout-relay"
+main = "relay.ts"
+compatibility_date = "2025-01-01"
+
+# Stateless on purpose: no KV, R2, D1 or cache bindings.
+[vars]
+QUIP_HOST_ALLOWLIST = "quip.com,*.quip.com"
+# ALLOWED_ORIGIN and SITE_URL are set to the production site when it is known.
+
+# Secrets (set with `wrangler secret put`, never in this file):
+#   LICENCE_SECRET, STRIPE_SECRET_KEY (test key until live), STRIPE_PRICE_SITE, STRIPE_PRICE_LARGE

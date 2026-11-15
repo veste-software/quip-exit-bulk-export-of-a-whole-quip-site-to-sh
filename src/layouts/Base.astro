@@ -1,14 +1,22 @@
 ---
-// The brand kit: self-hosted fonts (@fontsource @imports), tokens and base styles. See DESIGN.md.
+// The brand kit: self-hosted fonts (@fontsource, no CDN), tokens and base styles. See DESIGN.md.
+import '@fontsource/big-shoulders-stencil-display/latin-800';
+import '@fontsource/ibm-plex-sans/latin-400';
+import '@fontsource/ibm-plex-sans/latin-400-italic';
+import '@fontsource/ibm-plex-sans/latin-600';
+import '@fontsource/ibm-plex-mono/latin-400';
+import '@fontsource/ibm-plex-mono/latin-500';
 import '../styles/brand.css';
+import '../styles/components.css';
 import Logo from '../components/Logo.astro';
 import { url } from '../lib/url';
 
 interface Props {
   title: string;
   description: string;
+  noindex?: boolean;
 }
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 // Cloudflare Web Analytics: cookie-free, only rendered when the token is set at build time.
 const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
@@ -20,6 +28,7 @@ const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
     <meta name="theme-color" content="#dfcba6" />

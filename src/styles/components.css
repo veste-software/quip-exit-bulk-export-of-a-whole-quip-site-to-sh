@@ -1,0 +1,89 @@
+/* Composite pieces built from the brand kit: the waybill (the tool), text buttons, ledger pickers.
+   Flat colour, hard edges, no gradients. Tokens come from brand.css. */
+
+.tool { min-width: 0; }
+.tool .label__head > span:first-child { min-height: 1.4em; }
+.tool [tabindex='-1']:focus { outline: none; }
+.tool [tabindex='-1']:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.tool__line { margin: 0 0 var(--s2); }
+.tool__after { margin: var(--s2) 0 0; font-size: var(--small); color: var(--ink-faded); }
+
+/* a button that looks like a link: the "Stop", "Start over" and sample-site actions */
+.linklike {
+  display: inline;
+  min-height: 2.75rem;
+  padding: 0;
+  font: inherit;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+.linklike:hover { color: var(--accent-ink); text-decoration-thickness: 2px; }
+
+.actions { display: grid; gap: var(--s2); justify-items: start; margin-top: var(--s2); }
+.actions .btn--block { justify-self: stretch; }
+
+/* stencilled counts, 3 x 2 */
+.waybill__counts {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s3) var(--s2);
+  margin-bottom: var(--s2);
+}
+.counts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); margin-bottom: var(--s2); }
+.count-cell .count { font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem); font-variant-numeric: tabular-nums; }
+.count-cell .label-text { font-size: 0.8125rem; letter-spacing: 0.06em; }
+.waybill__counts .sticker { position: absolute; top: -2.25rem; right: 0; font-size: 0.75rem; padding: 0.25rem var(--s1); }
+
+.exceptions { list-style: none; margin: 0 0 var(--s2); padding: 0; text-transform: none; letter-spacing: 0.02em; }
+.exceptions li { max-width: none; margin-bottom: 0.25rem; }
+.waybill__barcode { display: block; color: var(--ink); }
+
+.stub__line { font-size: var(--small); }
+.empty { text-align: left; }
+.empty img { display: block; margin-bottom: var(--s2); }
+
+.tool .ticks { margin-bottom: var(--s2); }
+.tool .ticks__row { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); }
+.tool .tick { min-height: 3rem; }
+.tool .field { margin-bottom: var(--s2); }
+
+/* tick box without its row, used in the document picker ledger */
+.tick--bare { min-height: 0; padding: 0; border: 0; background: none; box-shadow: none !important; }
+.tool .ledger { margin-bottom: var(--s2); }
+.tool .ledger td { padding-block: var(--s1); }
+
+.notice__tag { white-space: nowrap; }
+.notice--stopped { margin-bottom: var(--s2); }
+
+/* home sections */
+.section { padding-block: var(--s6) 0; }
+.rail { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s2); }
+.ledger-wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s4); align-items: start; }
+.ledger-art { display: none; }
+@media (min-width: 60rem) {
+  .ledger-wrap { grid-template-columns: minmax(0, 1fr) 14rem; }
+  .ledger-art { display: grid; gap: var(--s4); }
+}
+.ledger-panel { background: var(--label); border: var(--rule-strong); padding: var(--s3); }
+.ledger code { font-family: var(--font-mono); font-size: 0.9375rem; }
+.howto { display: grid; grid-template-columns: minmax(0, 12rem) minmax(0, 1fr); gap: var(--s4); align-items: center; }
+.howto ol { margin: 0; padding-left: 1.25rem; }
+.howto li { margin-bottom: var(--s1); }
+@media (max-width: 40rem) { .howto { grid-template-columns: minmax(0, 1fr); } .howto img { max-width: 10rem; } }
+.steps h3 { margin-top: var(--s1); }
+.steps p { margin: 0; font-size: var(--small); }
+
+@media (max-width: 30rem) {
+  .waybill__counts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .waybill__counts .sticker { top: -2.25rem; }
+  .tool .ticks__row { grid-template-columns: minmax(0, 1fr); }
+  .tool .tick { min-height: 2.75rem; }
+  .tool .input, .input-row .toggle { min-height: 3rem; }
+}

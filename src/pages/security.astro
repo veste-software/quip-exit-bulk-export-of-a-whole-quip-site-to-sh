@@ -1,0 +1,48 @@
+---
+import Page from '../layouts/Page.astro';
+import { url } from '../lib/url';
+---
+<Page
+  title="Security: what happens to your Quip token | Packout"
+  description="Your Quip token stays in your browser tab and goes only to Quip through a stateless relay that stores and logs nothing. How to revoke the token afterwards."
+  kicker="Security · your token and your documents"
+  heading="What happens to your token"
+  lead="Your token stays in this tab and goes only to Quip. Delete it on your Quip site when you are done."
+>
+  <h2>Where the token lives</h2>
+  <p>
+    You paste a personal access token into the form. The page keeps it in memory, in the running tab, and nowhere else. It is not written to a cookie, to local storage, to IndexedDB, to the ZIP file or to the web address. The one optional exception is resume: if you ask for it, the token can be kept in session storage, which the browser deletes when the tab closes. Closing the tab ends everything.
+  </p>
+  <p>
+    The token is sent only in the <code>Authorization</code> header of requests to Quip, never as part of an address, because addresses end up in logs. A token sees only what its owner can see: documents in folders your account has no access to are not exported, and the dry run counts will show that.
+  </p>
+
+  <h2>Why there is a relay</h2>
+  <p>
+    Browsers only let a page read an answer from another site when that site permits it, and we have not seen Quip’s API do so. Packout therefore sends your requests through a small relay on Cloudflare Workers. The relay accepts a Quip host name, checks that it is on its allowlist of Quip domains, and forwards the request with the token you supplied. It passes the answer back, removes cookies and tells the browser not to cache it.
+  </p>
+  <p>
+    The relay has no database, no key-value store, no object storage and no cache. It cannot remember anything between two requests. It writes no logs of request bodies or of the <code>Authorization</code> header; the only thing it records is the method, a path with document ids replaced by a placeholder, and the status code. Its source is a single file, <code>worker/relay.ts</code> in the project’s repository, so anyone can check these statements against the code. The tests of that file check that the token and the body text appear in no log line, and that the configuration declares no storage.
+  </p>
+
+  <h2>What the relay does see</h2>
+  <p>
+    Honesty requires saying it: for the time a request passes through, the relay handles your documents and your token in memory, because forwarding is the whole job. That is why the points above matter, and why you should delete the token afterwards. If your company policy forbids sending Quip content through a third party, do not use this tool; a command-line exporter run on your own machine is the alternative.
+  </p>
+
+  <h2>Counters</h2>
+  <p>
+    The site counts a few events, such as “dry run done” or “export failed”, with a request that carries the event name and nothing else. No document titles, counts, hosts, ids or tokens are sent. Page visits are measured with a cookie-free beacon. Details are in the <a href={url('datenschutz/')}>privacy policy</a>.
+  </p>
+
+  <h2>Revoke the token afterwards</h2>
+  <ol>
+    <li>Open <code>https://&lt;your site&gt;/dev/token</code> while signed in to Quip. For the public service this is quip.com/dev/token.</li>
+    <li>Find the token you generated for the export and delete or regenerate it. Regenerating makes the old token useless.</li>
+    <li>Check that the old token no longer works, if you want to be certain, by running a dry run with it: Quip should answer with a refusal.</li>
+  </ol>
+  <p><img src={url('art/spot-1.svg')} width="480" height="360" alt="A key tag with a masked token in a slot" loading="lazy" style="max-width: 20rem" /></p>
+  <p>
+    How the ZIP is built, where the files go and what they cost: <a href={url('pricing/')}>pricing</a>, or go straight to the <a href={`${url('')}#tool`}>free dry run</a>.
+  </p>
+</Page>
