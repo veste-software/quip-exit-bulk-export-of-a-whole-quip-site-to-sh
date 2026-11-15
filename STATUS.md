@@ -1,6 +1,6 @@
 # Quip Exit: bulk export of a whole Quip site to SharePoint, Google Drive or Notion, with folders, co…
 
-**Stage:** specced · **Platform:** web · **Score:** 3.1/5 · **Spend:** $2.98
+**Stage:** planned · **Platform:** web · **Score:** 3.1/5 · **Spend:** $3.52
 
 For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: paste a Quip API token and pick folders. Documents become DOCX, HTML or Markdown and spreadsheets become XLSX; the folder tree is rebuilt, inline comments are saved and internal Quip links are rewritten to the new paths, ready for SharePoint, Google Drive or Notion. If it takes off, it becomes the reference 'leaving Quip' site, and the same export engine serves the next document-tool retirement.
 
@@ -13,6 +13,10 @@ For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: past
 - [ ] [task 3] Deploy the Cloudflare Worker relay and the static site, and set LICENSE_SIGNING_SECRET and QUIP_HOST_ALLOWLIST
 - [ ] [task 4] Run one real export with a Quip test account to confirm CORS behaviour, the enterprise host pattern, and that Notion's ZIP import keeps relative links
 - [ ] [task 5] Add the site to Google Search Console and submit the sitemap
+- [ ] [task 6] Pick the brand name and buy the domain (the name must not start with 'Quip')
+- [ ] [task 7] Create the Stripe account and the two products (149 EUR, 390 EUR) with tax ID collection and invoices; when going live, set STRIPE_SECRET_KEY, STRIPE_PRICE_SITE and STRIPE_PRICE_LARGE
+- [ ] [task 8] Deploy the Cloudflare Worker relay and the static site; set LICENSE_SIGNING_SECRET, QUIP_HOST_ALLOWLIST and PUBLIC_RELAY_URL (optionally PUBLIC_CF_ANALYTICS_TOKEN)
+- [ ] [task 9] Run one real export with a Quip test account to confirm CORS behaviour, the enterprise API host pattern, and that Notion's ZIP import keeps relative links
 
 ## Recommendation
 
@@ -64,3 +68,4 @@ one-off (Free: unlimited dry run plus export of up to 20 documents. Site pass 14
 
 - 2026-11-14 21:18 · scouted · ranked first in the daily pool (aggregate 2.45 of 5 by 2 independent rankers); the studio builds the day's best candidate whatever its score, and the prototype is how it is judged
 - 2026-11-14 21:25 · specced · spec written
+- 2026-11-15 15:43 · planned · scaffold and plan written
