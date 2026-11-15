@@ -1,6 +1,6 @@
 # Quip Exit: bulk export of a whole Quip site to SharePoint, Google Drive or Notion, with folders, co…
 
-**Stage:** qa · **Platform:** web · **Score:** 3.1/5 · **Spend:** $11.22
+**Stage:** building · **Platform:** web · **Score:** 3.1/5 · **Spend:** $11.49
 
 For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: paste a Quip API token and pick folders. Documents become DOCX, HTML or Markdown and spreadsheets become XLSX; the folder tree is rebuilt, inline comments are saved and internal Quip links are rewritten to the new paths, ready for SharePoint, Google Drive or Notion. If it takes off, it becomes the reference 'leaving Quip' site, and the same export engine serves the next document-tool retirement.
 
@@ -30,6 +30,12 @@ For teams whose Salesforce Quip subscription cannot renew after 2027-03-01: past
 - [ ] [task 20] Publish the repository (or a public copy of worker/relay.ts) and give the URL so /security can link to the relay source.
 - [ ] [task 21] Pick the final brand name and domain (must not start with Quip), then add the site to Google Search Console and submit the sitemap.
 - [ ] [task 22] Blocked: [QA round 1] npm audit critical/high (astro <=7.4.6, sharp, zod) (The fix is the astro 5 to 7 major upgrade. npm audit and installing a new astro version cannot be run here, and a major upgrade needs a human decision. Exposure is low (static output).)
+- [ ] [task 23] Decide on the astro 5 to 7 major upgrade to clear npm audit findings (or accept the risk for a static site); if upgrading, re-run npm test, build, build:preview, check:dist and design-check
+- [ ] [task 24] Run one real export with a Quip test account: confirm CORS via the relay, the enterprise host pattern, comment author fields, and that Notion's ZIP import keeps relative links
+- [ ] [task 25] Test that the .url shortcuts from the SharePoint preset open after upload to a SharePoint library
+- [ ] [task 26] Set ALLOWED_ORIGIN, STRIPE_SECRET_KEY, STRIPE_PRICE_SITE, STRIPE_PRICE_LARGE and LICENCE_SECRET (the name the code reads) on the Cloudflare Worker; keep Stripe in test mode until going live
+- [ ] [task 27] Pick the final brand name and domain, then add a repository URL for the relay source link on /security
+- [ ] [task 28] Remove the 'test mode' sentence from /pricing when payments go live
 
 ## Recommendation
 
@@ -79,7 +85,6 @@ one-off (Free: unlimited dry run plus export of up to 20 documents. Site pass 14
 
 ## History
 
-- 2026-11-14 21:18 · scouted · ranked first in the daily pool (aggregate 2.45 of 5 by 2 independent rankers); the studio builds the day's best candidate whatever its score, and the prototype is how it is judged
 - 2026-11-14 21:25 · specced · spec written
 - 2026-11-15 15:43 · planned · scaffold and plan written
 - 2026-11-15 16:15 · building · build started
@@ -91,3 +96,4 @@ one-off (Free: unlimited dry run plus export of up to 20 documents. Site pass 14
 - 2026-11-15 16:47 · qa · all planned tasks done
 - 2026-11-15 16:54 · building · visual review round 2: average 3.8
 - 2026-11-15 17:00 · qa · all planned tasks done
+- 2026-11-15 17:06 · building · QA round 2 found 1 blocker(s)
