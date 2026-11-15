@@ -1,0 +1,85 @@
+---
+// fontsource "exports" map adds the .css extension itself
+import '@fontsource/big-shoulders-stencil-display/latin-800';
+import '@fontsource/ibm-plex-sans/latin-400';
+import '@fontsource/ibm-plex-sans/latin-400-italic';
+import '@fontsource/ibm-plex-sans/latin-600';
+import '@fontsource/ibm-plex-mono/latin-400';
+import '@fontsource/ibm-plex-mono/latin-500';
+import '../styles/tokens.css';
+import Logo from '../components/Logo.astro';
+import { url } from '../lib/url';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+// Cloudflare Web Analytics: cookie-free, only rendered when the token is set at build time.
+const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+    <meta name="theme-color" content="#e9e7e1" />
+  </head>
+  <body>
+    <a class="skip label-text" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-row">
+        <Logo />
+        <nav aria-label="Main">
+          <a href={url('pricing/')}>Pricing</a>
+          <a href={url('security/')}>Security</a>
+          <a href={url('quip-retirement-timeline/')}>Deadlines</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-row">
+        <p class="disclaimer">
+          Packout is an independent tool. It is not affiliated with, endorsed by or sponsored by Salesforce or Quip.
+          “Quip” and “Salesforce” are trademarks of Salesforce, Inc., used here only to describe what this tool exports.
+        </p>
+        <nav aria-label="Legal and help">
+          <a href={url('security/')}>Security</a>
+          <a href={url('pricing/')}>Pricing</a>
+          <a href={url('impressum/')}>Impressum</a>
+          <a href={url('datenschutz/')}>Datenschutz / Privacy</a>
+        </nav>
+      </div>
+    </footer>
+    {cfToken && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={JSON.stringify({ token: cfToken })}
+      ></script>
+    )}
+  </body>
+</html>
+
+<style>
+  .skip { position: absolute; left: -999px; top: 0; background: var(--label); padding: var(--s1) var(--s2); }
+  .skip:focus { left: var(--s2); z-index: 10; }
+  .site-header { border-bottom: var(--rule); }
+  .header-row { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); padding-block: var(--s2); flex-wrap: wrap; }
+  nav { display: flex; gap: var(--s3); flex-wrap: wrap; }
+  nav a { font-family: var(--font-mono); font-size: var(--step--1); text-transform: uppercase; letter-spacing: var(--track-label); min-height: var(--control-h); display: inline-flex; align-items: center; }
+  .site-footer { border-top: var(--perforation); margin-top: var(--s8); }
+  .footer-row { display: grid; gap: var(--s3); padding-block: var(--s4); grid-template-columns: 2fr 1fr; }
+  .disclaimer { font-size: 0.9375rem; color: var(--ink-faded); margin: 0; }
+  .site-footer nav { flex-direction: column; gap: 0; }
+  @media (max-width: 48rem) { .footer-row { grid-template-columns: 1fr; } }
+</style>

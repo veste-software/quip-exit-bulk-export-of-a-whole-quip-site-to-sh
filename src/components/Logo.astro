@@ -1,0 +1,18 @@
+---
+/** Packout mark: a carton seen from the front with a strip of packing tape and one tear notch. */
+import { url } from '../lib/url';
+---
+<a class="logo" href={url('')} aria-label="Packout, home">
+  <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+    <rect x="2" y="8" width="36" height="28" fill="var(--kraft)" stroke="var(--ink)" stroke-width="2" />
+    <rect x="16" y="8" width="8" height="28" fill="var(--label)" stroke="var(--ink)" stroke-width="2" />
+    <path d="M2 8 L8 2 H32 L38 8" fill="none" stroke="var(--ink)" stroke-width="2" />
+    <circle cx="38" cy="24" r="3" fill="var(--paper)" stroke="var(--ink)" stroke-width="2" />
+  </svg>
+  <span class="wordmark">Packout</span>
+</a>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); }
+  .wordmark { font-family: var(--font-stencil); font-weight: 800; font-size: 1.75rem; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; }
+</style>

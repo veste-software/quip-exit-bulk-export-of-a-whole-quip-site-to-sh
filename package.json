@@ -1,0 +1,30 @@
+{
+  "name": "packout",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Packout: browser-based bulk export for Quip sites (working name). Static Astro site plus a stateless Cloudflare Worker relay.",
+  "scripts": {
+    "build": "astro build",
+    "build:preview": "SITE_URL=https://example.github.io SITE_BASE=/preview astro build",
+    "test": "vitest run",
+    "design-check": "node scripts/design-check.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/preact": "^4.0.0",
+    "@fontsource/big-shoulders-stencil-display": "^5.0.0",
+    "@fontsource/ibm-plex-mono": "^5.0.0",
+    "@fontsource/ibm-plex-sans": "^5.0.0",
+    "astro": "^5.0.0",
+    "fflate": "^0.8.2",
+    "preact": "^10.24.0",
+    "turndown": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/turndown": "^5.0.5",
+    "fake-indexeddb": "^6.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  }
+}

@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Barcode from '../components/Barcode.astro';
+import { url } from '../lib/url';
+---
+<Base title="Parcel not found – Packout" description="This page does not exist.">
+  <div class="wrap lost">
+    <p class="label-text">Delivery note · status: undeliverable</p>
+    <h1>Address unknown</h1>
+    <p>This carton came back to the depot: there is no page at this address. Your Quip documents are not affected.</p>
+    <p><a href={url('')}>Back to the export tool</a></p>
+    <div class="code"><Barcode seed="RTS-404-000" /></div>
+  </div>
+</Base>
+
+<style>
+  .lost { padding-block: var(--s8); }
+  .code { max-width: 18rem; margin-top: var(--s4); }
+</style>

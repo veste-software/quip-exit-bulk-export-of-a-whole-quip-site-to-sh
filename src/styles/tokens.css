@@ -1,0 +1,128 @@
+/*
+  Packout design tokens. The one stylesheet that holds fonts, colours, scale and spacing.
+  See DESIGN.md. Everything else reads these custom properties; no colour literals elsewhere.
+  Fonts are self-hosted via @fontsource (imported in src/layouts/Base.astro).
+*/
+:root {
+  /* palette: thermal-paper parcel label */
+  --paper: #e9e7e1;       /* page surface: thermal paper grey */
+  --label: #f8f7f3;       /* label stock: forms, results, the ticket */
+  --ink: #1e1f22;         /* thermal print black (never pure black) */
+  --ink-faded: #55565b;   /* faded print: secondary text, rules (5.6:1 on paper) */
+  --kraft: #b5844f;       /* carton and packing tape: decoration and progress only, never text */
+  --fragile: #c2321b;     /* the FRAGILE sticker: primary action fill, warnings (white text 5.5:1) */
+  --fragile-ink: #a82b16; /* fragile red when it has to be text on paper */
+
+  /* type */
+  --font-stencil: 'Big Shoulders Stencil Display', 'Arial Narrow', sans-serif;
+  --font-text: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --step--1: 0.8125rem;  /* 13px mono labels, uppercase, tracked */
+  --step-0: 1.125rem;    /* 18px body */
+  --step-1: 1.375rem;    /* 22px lead */
+  --step-2: 2rem;        /* 32px section heads (stencil) */
+  --step-3: clamp(2.75rem, 6vw, 4.5rem);   /* stencil counts */
+  --step-4: clamp(3rem, 8vw, 6.5rem);      /* page headline */
+
+  --track-label: 0.12em;
+  --measure: 66ch;
+
+  /* space: 8px base, used in multiples only */
+  --s1: 0.5rem;
+  --s2: 1rem;
+  --s3: 1.5rem;
+  --s4: 2rem;
+  --s6: 3rem;
+  --s8: 4rem;
+
+  --rule: 1px solid var(--ink);
+  --rule-faded: 1px solid var(--ink-faded);
+  --perforation: 2px dashed var(--ink-faded);
+  --radius: 2px;          /* one deliberate, almost square radius: label stock corners */
+  --control-h: 3rem;      /* 48px minimum control height */
+  --shadow-label: 3px 3px 0 var(--ink); /* hard offset, like a label stuck on slightly proud */
+
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-size: var(--step-0);
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+h1, h2, h3 {
+  font-family: var(--font-stencil);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  margin: 0 0 var(--s2);
+  text-transform: uppercase;
+}
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-2); }
+h3 { font-size: var(--step-1); }
+
+p, li { max-width: var(--measure); }
+
+a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { color: var(--fragile-ink); text-decoration-thickness: 2px; }
+
+.label-text {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  font-weight: 500;
+}
+
+.num { font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
+
+::selection { background: var(--kraft); color: var(--ink); }
+
+:focus-visible {
+  outline: 3px solid var(--fragile);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--s3);
+}
+@media (max-width: 30rem) {
+  .wrap { padding-inline: var(--s2); }
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+@media print {
+  html, body { background: #fff; }
+  .site-header nav, .site-footer nav { display: none; }
+}

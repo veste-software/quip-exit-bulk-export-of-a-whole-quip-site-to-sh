@@ -1,0 +1,33 @@
+---
+// Scaffold home page. PLAN.md tasks replace the placeholder block below with the
+// <ExportTool client:load /> island (token field, host choice, "Free dry run").
+import Base from '../layouts/Base.astro';
+import Barcode from '../components/Barcode.astro';
+---
+<Base
+  title="Export a whole Quip site in one ZIP – folders, comments, working links | Packout"
+  description="Bulk export for Quip sites in your browser: every folder, every comment and links between documents that still work, ready for SharePoint, Google Drive or Notion. Free dry run."
+>
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <p class="label-text">Bulk export for Quip sites · nothing to install</p>
+      <h1>Pack up your whole Quip site</h1>
+      <p class="lead">
+        One ZIP with your folders, every comment and links between documents that still work,
+        shaped for SharePoint, Google Drive or Notion, with a manifest that proves nothing was left behind.
+      </p>
+    </div>
+    <div class="ticket" id="tool">
+      <p class="label-text">Consignment · dry run</p>
+      <p>The export tool loads here.</p>
+      <Barcode seed="PKO-000-000" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--s6); padding-block: var(--s6); align-items: start; }
+  .lead { font-size: var(--step-1); line-height: 1.4; }
+  .ticket { background: var(--label); border: var(--rule); box-shadow: var(--shadow-label); padding: var(--s3); }
+  @media (max-width: 56rem) { .hero { grid-template-columns: 1fr; gap: var(--s3); padding-block: var(--s3); } }
+</style>

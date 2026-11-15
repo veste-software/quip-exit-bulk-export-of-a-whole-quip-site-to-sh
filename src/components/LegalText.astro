@@ -1,0 +1,27 @@
+---
+/**
+ * Renders the owner's legal texts from src/content/legal/*.html UNCHANGED.
+ * The studio installs these files; never write or edit legal text here.
+ * `kind` matches file names containing "impressum" or "datenschutz"/"privacy".
+ */
+interface Props {
+  kind: 'impressum' | 'datenschutz';
+}
+const { kind } = Astro.props;
+const files = import.meta.glob('../content/legal/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const pattern = kind === 'impressum' ? /impressum|imprint/i : /datenschutz|privacy/i;
+const texts = Object.entries(files)
+  .filter(([path]) => pattern.test(path.split('/').pop() ?? ''))
+  .sort(([a], [b]) => a.localeCompare(b));
+---
+{texts.map(([path, html]) => {
+  const lang = /(^|[._-])en([._-]|$)/i.test(path.split('/').pop() ?? '') ? 'en' : 'de';
+  return <section class="legal-text" lang={lang} set:html={html} />;
+})}
+
+<style>
+  .legal-text { max-width: var(--measure); padding-block: var(--s4); border-bottom: var(--rule-faded); }
+  .legal-text :global(h1), .legal-text :global(h2), .legal-text :global(h3) { font-family: var(--font-text); text-transform: none; font-weight: 600; line-height: 1.2; }
+  .legal-text :global(h1) { font-size: var(--step-2); }
+  .legal-text :global(h2) { font-size: var(--step-1); }
+</style>

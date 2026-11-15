@@ -1,0 +1,29 @@
+---
+/**
+ * Decorative barcode drawn as inline SVG rectangles (no gradients, no images).
+ * The bar pattern is derived from `seed`, so the same consignment always prints the same code.
+ * It is decoration: aria-hidden, with the human-readable number printed underneath.
+ */
+import { barcodeBars } from '../lib/barcode';
+
+interface Props {
+  seed: string;
+  height?: number;
+  showText?: boolean;
+}
+const { seed, height = 48, showText = true } = Astro.props;
+const bars = barcodeBars(seed);
+const width = bars.reduce((w, b) => Math.max(w, b.x + b.w), 0);
+---
+<figure class="barcode" aria-hidden="true">
+  <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" width="100%" height={height} focusable="false">
+    {bars.map((b) => <rect x={b.x} y="0" width={b.w} height={height} fill="currentColor" />)}
+  </svg>
+  {showText && <figcaption class="label-text num">{seed}</figcaption>}
+</figure>
+
+<style>
+  .barcode { margin: 0; color: var(--ink); }
+  .barcode svg { display: block; }
+  .barcode figcaption { margin-top: 0.25rem; text-align: center; letter-spacing: 0.3em; }
+</style>
