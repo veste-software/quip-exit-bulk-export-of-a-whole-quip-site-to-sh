@@ -20,6 +20,36 @@ const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 // Cloudflare Web Analytics: cookie-free, only rendered when the token is set at build time.
 const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+
+// Structured data that is true for the page: the tool on the home page, breadcrumbs on the rest.
+const siteRoot = new URL(import.meta.env.BASE_URL, Astro.site).href;
+const segments = Astro.url.pathname.replace(import.meta.env.BASE_URL, '/').split('/').filter(Boolean);
+const schemas: object[] = [];
+if (segments.length === 0) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Packout',
+    url: siteRoot,
+    description,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any (runs in a web browser)',
+    offers: [
+      { '@type': 'Offer', name: 'Free: dry run and export of up to 20 documents', price: '0', priceCurrency: 'EUR' },
+      { '@type': 'Offer', name: 'Site pass', price: '149', priceCurrency: 'EUR' },
+      { '@type': 'Offer', name: 'Large site pass', price: '390', priceCurrency: 'EUR' },
+    ],
+  });
+} else if (segments.length === 1 && !['impressum', 'datenschutz', '404', 'styleguide'].includes(segments[0])) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Packout', item: siteRoot },
+      { '@type': 'ListItem', position: 2, name: title.split(' | ')[0], item: canonical },
+    ],
+  });
+}
 ---
 <!doctype html>
 <html lang="en">
@@ -30,6 +60,16 @@ const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Packout" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
     <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
     <meta name="theme-color" content="#dfcba6" />
   </head>
