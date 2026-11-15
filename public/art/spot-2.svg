@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-labelledby="s2-t">
+  <title id="s2-t">Step 2: the free dry run, shown as an inventory on a clipboard being ticked off</title>
+  <g stroke="#1d2638" stroke-width="4" stroke-linejoin="miter" stroke-linecap="square">
+    <!-- flat offset shadows -->
+    <g fill="#c9b085" stroke="none">
+      <rect transform="translate(10 10) rotate(4 240 180)" x="150" y="40" width="180" height="280"/>
+      <rect transform="translate(358 258) rotate(-35)" x="-106" y="-10" width="182" height="20"/>
+    </g>
+
+    <!-- clipboard with the inventory -->
+    <g transform="rotate(4 240 180)">
+      <rect x="150" y="40" width="180" height="280" fill="#1d2638"/>
+      <rect x="164" y="64" width="152" height="242" fill="#f7f3ea"/>
+      <rect x="196" y="28" width="88" height="30" fill="#c9b085"/>
+
+      <g fill="#f7f3ea">
+        <rect x="178" y="89" width="22" height="22"/>
+        <rect x="178" y="129" width="22" height="22"/>
+        <rect x="178" y="169" width="22" height="22"/>
+        <rect x="178" y="209" width="22" height="22"/>
+        <rect x="178" y="249" width="22" height="22"/>
+      </g>
+      <path d="M182 100 L188 106 L196 94 M182 140 L188 146 L196 134 M182 180 L188 186 L196 174 M182 220 L188 226 L196 214" stroke="#285e41" fill="none"/>
+      <path d="M212 100 H246 M212 140 H240 M212 180 H246 M212 220 H236" fill="none"/>
+      <path d="M212 260 H244" stroke="#4a5163" fill="none"/>
+
+      <!-- the counts: stencil figures drawn as solid blocks -->
+      <g fill="#1d2638" stroke="none">
+        <rect x="258" y="91" width="44" height="18"/>
+        <rect x="258" y="131" width="30" height="18"/>
+        <rect x="258" y="171" width="40" height="18"/>
+        <rect x="258" y="211" width="22" height="18"/>
+      </g>
+      <rect x="258" y="251" width="36" height="18" fill="#c9b085" stroke="none"/>
+    </g>
+
+    <!-- red pencil -->
+    <g transform="translate(350 250) rotate(-35)">
+      <rect x="-90" y="-10" width="140" height="20" fill="#c2321b"/>
+      <polygon points="50,-10 76,0 50,10" fill="#c9b085"/>
+      <polygon points="68,-3 76,0 68,3" fill="#1d2638"/>
+      <rect x="-106" y="-10" width="16" height="20" fill="#f7f3ea"/>
+    </g>
+  </g>
+</svg>

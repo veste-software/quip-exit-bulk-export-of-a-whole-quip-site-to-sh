@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-labelledby="s1-t">
+  <title id="s1-t">Step 1: copy your personal Quip token, shown as a key tag with a masked code</title>
+  <g stroke="#1d2638" stroke-width="4" stroke-linejoin="miter" stroke-linecap="square">
+    <!-- flat offset shadows -->
+    <g fill="#c9b085" stroke="none" transform="translate(10 10)">
+      <polygon transform="rotate(-6 250 180)" points="150,110 390,110 390,250 150,250 110,210 110,150"/>
+      <circle cx="136" cy="300" r="22"/>
+      <path d="M157 292 H264 V304 H250 V316 H238 V304 H226 V314 H214 V304 H157 Z"/>
+    </g>
+
+    <!-- the key tag -->
+    <g transform="rotate(-6 250 180)">
+      <polygon points="150,110 390,110 390,250 150,250 110,210 110,150" fill="#f7f3ea"/>
+      <circle cx="138" cy="180" r="10" fill="#dfcba6"/>
+      <rect x="170" y="134" width="72" height="8" fill="#4a5163" stroke="none"/>
+      <rect x="170" y="158" width="196" height="44" fill="#dfcba6"/>
+      <g fill="#1d2638" stroke="none">
+        <rect x="184" y="175" width="10" height="10"/>
+        <rect x="206" y="175" width="10" height="10"/>
+        <rect x="228" y="175" width="10" height="10"/>
+        <rect x="250" y="175" width="10" height="10"/>
+        <rect x="272" y="175" width="10" height="10"/>
+        <rect x="294" y="175" width="10" height="10"/>
+        <rect x="316" y="175" width="10" height="10"/>
+      </g>
+      <rect x="340" y="168" width="4" height="24" fill="#c2321b" stroke="none"/>
+      <path d="M170 226 H300" fill="none"/>
+    </g>
+
+    <!-- tape holding the tag to the carton -->
+    <path transform="translate(380 100) rotate(35)" d="M-45 -13 H45 L39 -6.5 L45 0 L39 6.5 L45 13 H-45 L-39 6.5 L-45 0 L-39 -6.5 Z" fill="#a8743c" stroke="none"/>
+
+    <!-- string, key and ring -->
+    <path d="M139 192 C 118 206, 112 240, 124 270" fill="none"/>
+    <circle cx="136" cy="300" r="22" fill="#a8743c"/>
+    <circle cx="136" cy="300" r="7" fill="#dfcba6"/>
+    <path d="M157 292 H264 V304 H250 V316 H238 V304 H226 V314 H214 V304 H157 Z" fill="#a8743c"/>
+    <circle cx="126" cy="286" r="16" fill="none"/>
+  </g>
+</svg>

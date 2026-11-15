@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Packout mark, "the taped seam": a carton seen from above, its seam sealed by one strip of
+       packing tape torn off at the bottom, and the red sticker that says something fragile is inside. -->
+  <rect x="4" y="12" width="56" height="44" fill="#a8743c" stroke="#1d2638" stroke-width="4" stroke-linejoin="miter"/>
+  <path d="M26 5 H38 V57 L35 61 L32 57 L29 61 L26 57 Z" fill="#f7f3ea" stroke="#1d2638" stroke-width="4" stroke-linejoin="miter"/>
+  <rect x="44" y="37" width="10" height="11" fill="#c2321b"/>
+</svg>

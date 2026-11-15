@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-labelledby="sc-t">
+  <title id="sc-t">Every comment kept: a document with three red comment notes in its margin and a second copy behind it</title>
+  <g stroke="#1d2638" stroke-width="4" stroke-linejoin="miter" stroke-linecap="square">
+    <!-- flat offset shadows -->
+    <g fill="#c9b085" stroke="none" transform="translate(10 10)">
+      <rect transform="rotate(5 230 180)" x="150" y="60" width="180" height="250"/>
+      <rect transform="rotate(-3 210 180)" x="110" y="44" width="190" height="264"/>
+      <path d="M272 72 H352 V120 H272 V106 L256 98 L272 92 Z"/>
+      <path d="M288 150 H368 V198 H288 V184 L272 176 L288 170 Z"/>
+      <path d="M272 228 H352 V276 H272 V262 L256 254 L272 248 Z"/>
+    </g>
+
+    <!-- the copy behind: the DOCX with its comments appendix -->
+    <g transform="rotate(5 230 180)">
+      <rect x="150" y="60" width="180" height="250" fill="#f7f3ea"/>
+      <path d="M306 100 H316 M306 130 H316 M306 160 H316 M306 190 H316 M306 220 H316 M306 250 H316 M306 280 H316" fill="none"/>
+    </g>
+
+    <!-- the document -->
+    <g transform="rotate(-3 210 180)">
+      <rect x="110" y="44" width="190" height="264" fill="#f7f3ea"/>
+      <rect x="130" y="68" width="88" height="14" fill="#1d2638" stroke="none"/>
+      <path d="M130 106 H270 M130 128 H250 M130 150 H270 M130 172 H236 M130 194 H270 M130 216 H260 M130 238 H270 M130 260 H226 M130 282 H254" fill="none"/>
+    </g>
+
+    <!-- tape at the top corner -->
+    <path transform="translate(124 52) rotate(-28)" d="M-45 -13 H45 L39 -6.5 L45 0 L39 6.5 L45 13 H-45 L-39 6.5 L-45 0 L-39 -6.5 Z" fill="#a8743c" stroke="none"/>
+
+    <!-- three comment notes in the margin, each pointing at its line -->
+    <path d="M272 72 H352 V120 H272 V106 L256 98 L272 92 Z" fill="#c2321b"/>
+    <path d="M288 150 H368 V198 H288 V184 L272 176 L288 170 Z" fill="#c2321b"/>
+    <path d="M272 228 H352 V276 H272 V262 L256 254 L272 248 Z" fill="#c2321b"/>
+    <path d="M284 88 H336 M284 104 H322 M300 166 H352 M300 182 H338 M284 244 H336 M284 260 H322" stroke="#f7f3ea" fill="none"/>
+  </g>
+</svg>

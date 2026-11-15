@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-labelledby="sl-t">
+  <title id="sl-t">Links that still work: two documents tied together by a string, with a small tag that records the new path</title>
+  <g stroke="#1d2638" stroke-width="4" stroke-linejoin="miter" stroke-linecap="square">
+    <!-- flat offset shadows -->
+    <g fill="#c9b085" stroke="none" transform="translate(10 10)">
+      <rect transform="rotate(-5 145 170)" x="70" y="70" width="150" height="200"/>
+      <rect transform="rotate(4 345 196)" x="270" y="96" width="150" height="200"/>
+      <polygon transform="rotate(8 236 240)" points="226,246 246,246 258,258 258,300 214,300 214,258"/>
+    </g>
+
+    <!-- document A: the link line ends in a grommet -->
+    <g transform="rotate(-5 145 170)">
+      <rect x="70" y="70" width="150" height="200" fill="#f7f3ea"/>
+      <path d="M88 100 H190 M88 120 H200 M88 140 H170 M88 186 H200 M88 206 H184 M88 226 H200 M88 246 H150" fill="none"/>
+      <path d="M88 160 H164" fill="none"/>
+      <circle cx="180" cy="160" r="7" fill="#f7f3ea"/>
+    </g>
+
+    <!-- document B: the target, with its title block -->
+    <g transform="rotate(4 345 196)">
+      <rect x="270" y="96" width="150" height="200" fill="#f7f3ea"/>
+      <rect x="288" y="116" width="64" height="14" fill="#1d2638" stroke="none"/>
+      <path d="M308 150 H400 M308 170 H392 M308 190 H400 M308 214 H380 M288 238 H400 M288 258 H360" fill="none"/>
+      <circle cx="292" cy="214" r="7" fill="#f7f3ea"/>
+    </g>
+
+    <!-- tape holding both documents down -->
+    <path transform="translate(84 74) rotate(-30)" d="M-45 -13 H45 L39 -6.5 L45 0 L39 6.5 L45 13 H-45 L-39 6.5 L-45 0 L-39 -6.5 Z" fill="#a8743c" stroke="none"/>
+    <path transform="translate(414 100) rotate(28)" d="M-45 -13 H45 L39 -6.5 L45 0 L39 6.5 L45 13 H-45 L-39 6.5 L-45 0 L-39 -6.5 Z" fill="#a8743c" stroke="none"/>
+
+    <!-- the string and the tag with the new path (link-map.csv) -->
+    <path d="M179 157 C 210 250, 262 262, 291 210" fill="none"/>
+    <path d="M236 238 V250" fill="none"/>
+    <g transform="rotate(8 236 240)">
+      <polygon points="226,246 246,246 258,258 258,300 214,300 214,258" fill="#f7f3ea"/>
+      <circle cx="236" cy="260" r="5" fill="#dfcba6"/>
+      <path d="M222 276 H250 M222 288 H242" fill="none"/>
+    </g>
+  </g>
+</svg>

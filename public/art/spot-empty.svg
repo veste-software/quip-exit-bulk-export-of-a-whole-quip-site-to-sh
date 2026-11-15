@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-labelledby="se-t">
+  <title id="se-t">Nothing counted yet: an open, empty carton seen from above</title>
+  <g stroke="#1d2638" stroke-width="4" stroke-linejoin="miter" stroke-linecap="square">
+    <!-- flat offset shadow of the opened carton -->
+    <g fill="#c9b085" stroke="none" transform="translate(10 10)">
+      <rect x="150" y="40" width="180" height="270"/>
+      <rect x="70" y="100" width="340" height="150"/>
+    </g>
+
+    <!-- four flaps folded out flat -->
+    <rect x="150" y="40" width="180" height="60" fill="#c9b085"/>
+    <rect x="150" y="250" width="180" height="60" fill="#c9b085"/>
+    <rect x="70" y="100" width="80" height="150" fill="#c9b085"/>
+    <rect x="330" y="100" width="80" height="150" fill="#c9b085"/>
+
+    <!-- the opening: dark walls, lighter floor, an empty place waiting for the inventory -->
+    <rect x="150" y="100" width="180" height="150" fill="#a8743c"/>
+    <rect x="172" y="122" width="136" height="106" fill="#c9b085"/>
+    <path d="M150 100 L172 122 M330 100 L308 122 M150 250 L172 228 M330 250 L308 228" fill="none"/>
+    <rect x="192" y="142" width="96" height="66" fill="none" stroke="#4a5163" stroke-dasharray="10 8" stroke-linecap="butt"/>
+
+    <!-- a loose piece of tape, ready -->
+    <path transform="translate(390 294) rotate(-18)" d="M-45 -13 H45 L39 -6.5 L45 0 L39 6.5 L45 13 H-45 L-39 6.5 L-45 0 L-39 -6.5 Z" fill="#a8743c" stroke="none"/>
+  </g>
+</svg>

@@ -1,0 +1,554 @@
+/*
+  Packout brand kit: fonts, tokens and base styles. The only place colours, type and spacing are defined.
+  Imported once in src/layouts/Base.astro, so every page starts on brand. See DESIGN.md.
+
+  The page is the side of a removal carton. The tool is a shipping label taped onto it.
+  Flat colour only: no gradients, no blur, no soft shadows. Depth = hard offset, overlap, tape.
+*/
+
+/* Self-hosted fonts (npm @fontsource). Never a CDN. */
+@import '@fontsource/big-shoulders-stencil-display/latin-800.css';
+@import '@fontsource/ibm-plex-sans/latin-400.css';
+@import '@fontsource/ibm-plex-sans/latin-400-italic.css';
+@import '@fontsource/ibm-plex-sans/latin-600.css';
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
+
+:root {
+  /* ---- palette (exact values; see DESIGN.md for contrast pairs) ---- */
+  --brand-carton: #dfcba6;        /* dominant surface: the side of the carton */
+  --brand-label: #f7f3ea;         /* label stock: the tool, packing lists, inputs */
+  --brand-carbon: #1d2638;        /* carbon-copy ink: all text, rules, outlines */
+  --brand-carbon-faded: #4a5163;  /* faded carbon: secondary text (5.0:1 on carton, 7.2:1 on label) */
+  --brand-tape: #a8743c;          /* packing tape: tape pieces, progress strip. Never behind text */
+  --brand-corrugate: #c9b085;     /* corrugate: flat shadows, disabled fills, illustration faces */
+  --brand-fragile: #c2321b;       /* the accent: primary button, FRAGILE sticker, focus ring */
+  --brand-fragile-ink: #9e2a14;   /* fragile red as text (4.7:1 on carton, 6.8:1 on label) */
+  --brand-tally: #285e41;         /* the signal: ticks, PACKED stamp, done, resolved (4.8:1 on carton) */
+
+  /* ---- roles (use these in components) ---- */
+  --paper: var(--brand-carton);
+  --label: var(--brand-label);
+  --ink: var(--brand-carbon);
+  --ink-faded: var(--brand-carbon-faded);
+  --tape: var(--brand-tape);
+  --kraft: var(--brand-tape);           /* alias kept for the scaffold */
+  --corrugate: var(--brand-corrugate);
+  --accent: var(--brand-fragile);
+  --accent-ink: var(--brand-fragile-ink);
+  --fragile: var(--brand-fragile);      /* alias */
+  --fragile-ink: var(--brand-fragile-ink);
+  --signal: var(--brand-tally);
+
+  /* ---- type ---- */
+  --font-display: 'Big Shoulders Stencil Display', 'Arial Narrow', sans-serif;
+  --font-stencil: var(--font-display);  /* alias */
+  --font-text: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --step--1: 0.875rem;                                    /* 14px mono labels, uppercase, tracked */
+  --step-0: 1.125rem;                                     /* 18px body, inputs, buttons */
+  --step-1: 1.375rem;                                     /* 22px lead, h3 */
+  --step-2: clamp(1.875rem, 1.4rem + 1.6vw, 2.5rem);      /* 30-40px section heads, stencil */
+  --step-3: clamp(2.5rem, 1.6rem + 3.6vw, 4rem);          /* 40-64px stencilled counts */
+  --step-4: clamp(2.5rem, 1.2rem + 4.4vw, 4.5rem);        /* 40-72px page headline, stencil */
+  --small: 1.0625rem;                                     /* 17px help text, footer */
+
+  --track-label: 0.1em;
+  --measure: 64ch;
+
+  /* ---- space: 8px base ---- */
+  --s1: 0.5rem;
+  --s2: 1rem;
+  --s3: 1.5rem;
+  --s4: 2rem;
+  --s6: 3rem;
+  --s8: 4rem;
+  --s12: 6rem;
+  --max: 72rem;
+
+  /* ---- rules, radii, shadows ---- */
+  --rule: 1px solid var(--ink);
+  --rule-strong: 2px solid var(--ink);
+  --rule-faded: 1px solid var(--ink-faded);
+  --perforation: 2px dashed var(--ink-faded);
+  --radius: 2px;                                 /* label-stock corners; the only radius */
+  --control-h: 3.25rem;                          /* 52px controls */
+  --shadow-label: 4px 4px 0 var(--ink);          /* the label, stuck on slightly proud */
+  --shadow-btn: 3px 3px 0 var(--ink);
+  --shadow-press: 1px 1px 0 var(--ink);
+  --tape-clip: polygon(0 0, 100% 0, 94% 25%, 100% 50%, 94% 75%, 100% 100%, 0 100%, 6% 75%, 0 50%, 6% 25%);
+  --tick-clip: polygon(12% 46%, 0 60%, 38% 96%, 100% 24%, 86% 10%, 38% 68%);
+  --corrugated-edge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='16' viewBox='0 0 20 16'%3E%3Cpath d='M0 1.5H20M0 14.5H20M0 14.5C5 14.5 5 1.5 10 1.5S15 14.5 20 14.5' fill='none' stroke='%23a8743c' stroke-width='2'/%3E%3C/svg%3E");
+
+  color-scheme: light;
+}
+
+/* ================= base ================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-size: var(--step-0);
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+img { max-width: 100%; height: auto; }
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0 0 var(--s2);
+  text-wrap: balance;
+}
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-2); }
+h3 {
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: var(--step-1);
+  line-height: 1.25;
+  margin: 0 0 var(--s1);
+}
+
+p { margin: 0 0 var(--s2); }
+p, li { max-width: var(--measure); }
+
+a {
+  color: var(--ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover { color: var(--accent-ink); text-decoration-thickness: 2px; }
+
+::selection { background: var(--tape); color: var(--ink); }
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--s3);
+}
+
+.label-text {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  line-height: 1.4;
+}
+
+.kicker { color: var(--ink-faded); margin: 0 0 var(--s2); }
+
+.lead { font-size: var(--step-1); line-height: 1.4; max-width: 44ch; }
+
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+.faded { color: var(--ink-faded); }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.art { display: block; width: 100%; height: auto; }
+
+/* ================= first screen ================= */
+/* Headline + lead + hero on the left, the taped label (the tool) on the right.
+   Under 60rem: headline, lead, tool, then the hero. */
+
+.first-screen {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  grid-template-areas: "copy tool" "art tool";
+  column-gap: var(--s6);
+  row-gap: var(--s3);
+  align-items: start;
+  padding-block: var(--s6) var(--s8);
+}
+.first-screen__copy { grid-area: copy; }
+.first-screen__tool { grid-area: tool; }
+.first-screen__art { grid-area: art; margin-top: calc(-1 * var(--s2)); }
+
+@media (max-width: 60rem) {
+  .first-screen {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "copy" "tool" "art";
+    padding-block: var(--s3) var(--s6);
+    row-gap: var(--s4);
+  }
+  .first-screen__art { margin-top: 0; }
+  .lead { font-size: 1.1875rem; }
+}
+
+/* ================= the label (signature) ================= */
+/* A shipping label taped to the carton: label stock, 2px ink edge, hard offset,
+   two pieces of packing tape over the top corners. */
+
+.label {
+  position: relative;
+  background: var(--label);
+  border: var(--rule-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-label);
+  padding: var(--s4) var(--s3) var(--s3);
+}
+.label::before,
+.label::after {
+  content: '';
+  position: absolute;
+  top: -0.875rem;
+  width: 6.5rem;
+  height: 1.75rem;
+  background: var(--tape);
+  clip-path: var(--tape-clip);
+}
+.label::before { left: var(--s3); transform: rotate(-5deg); }
+.label::after { right: var(--s3); transform: rotate(4deg); }
+.label--untaped::before,
+.label--untaped::after { content: none; }
+
+.label__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  padding-bottom: var(--s2);
+  margin-bottom: var(--s3);
+  border-bottom: var(--rule-strong);
+}
+
+/* perforated tear line with two half-circle notches cut into the label edges */
+.perf {
+  position: relative;
+  border: 0;
+  border-top: var(--perforation);
+  margin: var(--s3) calc(-1 * var(--s3));
+  height: 0;
+}
+.perf::before,
+.perf::after {
+  content: '';
+  position: absolute;
+  top: calc(-0.75rem - 1px);
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--paper);
+  border: var(--rule-strong);
+  border-radius: 50%;
+}
+.perf::before { left: calc(-0.75rem - 2px); clip-path: inset(0 0 0 50%); }
+.perf::after { right: calc(-0.75rem - 2px); clip-path: inset(0 50% 0 0); }
+
+/* a loose piece of packing tape, for decoration in sections */
+.tape-piece {
+  display: block;
+  width: 7rem;
+  height: 1.75rem;
+  background: var(--tape);
+  clip-path: var(--tape-clip);
+}
+
+/* the cut edge of corrugated board: section divider */
+.corrugated {
+  display: block;
+  height: 16px;
+  border: 0;
+  margin: var(--s8) 0;
+  background-image: var(--corrugated-edge);
+  background-repeat: repeat-x;
+  background-size: 20px 16px;
+}
+
+/* ================= buttons ================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s1);
+  min-height: var(--control-h);
+  padding: 0 var(--s3);
+  font-family: var(--font-text);
+  font-size: var(--step-0);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  color: var(--label);
+  background: var(--accent);
+  border: var(--rule-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-btn);
+  cursor: pointer;
+  transition: transform 80ms ease-out, box-shadow 80ms ease-out;
+}
+.btn:hover { color: var(--label); transform: translate(2px, 2px); box-shadow: var(--shadow-press); }
+.btn:active { transform: translate(3px, 3px); box-shadow: none; }
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  color: var(--ink);
+  background: var(--corrugate);
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+.btn--secondary {
+  color: var(--ink);
+  background: var(--label);
+  box-shadow: none;
+}
+.btn--secondary:hover { color: var(--ink); background: var(--paper); transform: none; box-shadow: none; }
+.btn--block { width: 100%; }
+.btn .num { font-weight: 500; }
+
+/* ================= form controls ================= */
+
+.field { display: grid; gap: var(--s1); margin: 0 0 var(--s3); }
+.field__label { color: var(--ink); }
+.field__help { font-size: var(--small); color: var(--ink-faded); margin: 0; }
+.field__error { font-size: var(--small); color: var(--accent-ink); font-weight: 600; margin: 0; }
+
+.input {
+  width: 100%;
+  min-height: var(--control-h);
+  padding: 0 var(--s2);
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--ink);
+  background: var(--label);
+  border: var(--rule-strong);
+  border-radius: var(--radius);
+  appearance: none;
+}
+.input::placeholder { color: var(--ink-faded); opacity: 1; }
+.input[aria-invalid='true'] { border-color: var(--accent-ink); }
+
+/* input with a text toggle inside ("Show") */
+.input-row { display: flex; }
+.input-row .input { border-radius: var(--radius) 0 0 var(--radius); }
+.input-row .toggle {
+  min-width: 4.5rem;
+  min-height: var(--control-h);
+  padding: 0 var(--s2);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--rule-strong);
+  border-inline-start-width: 0;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  cursor: pointer;
+}
+
+/* The drop area of this product is the token slot: a window cut into the label. */
+.slot,
+.dropzone {
+  display: grid;
+  gap: var(--s1);
+  padding: var(--s2);
+  background: var(--paper);
+  border: 2px dashed var(--ink-faded);
+  border-radius: var(--radius);
+}
+.slot:focus-within,
+.dropzone:focus-within,
+.dropzone.is-over { border-style: solid; border-color: var(--ink); }
+.slot.is-filled { border-style: solid; border-color: var(--signal); }
+
+/* printed tick boxes: radio or checkbox inputs drawn by hand, never the browser default */
+.ticks { border: 0; padding: 0; margin: 0 0 var(--s3); min-width: 0; }
+.ticks > legend { padding: 0; margin-bottom: var(--s1); }
+.ticks__row { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: var(--s1); }
+
+.tick {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: var(--control-h);
+  padding: 0 var(--s2);
+  font-size: var(--step-0);
+  background: var(--label);
+  border: var(--rule-strong);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.tick input {
+  appearance: none;
+  flex: none;
+  display: grid;
+  place-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  background: var(--label);
+  border: var(--rule-strong);
+  border-radius: 0;
+  cursor: pointer;
+}
+.tick input::before {
+  content: '';
+  width: 1.05rem;
+  height: 1.05rem;
+  background: var(--signal);
+  clip-path: var(--tick-clip);
+  transform: scale(0);
+  transition: transform 80ms ease-out;
+}
+.tick input:checked::before { transform: scale(1); }
+.tick input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.tick:has(input:checked) { font-weight: 600; box-shadow: inset 0 0 0 1px var(--ink); }
+
+select { /* never shipped: use .ticks. If one is unavoidable it still looks printed */
+  min-height: var(--control-h);
+  font: inherit;
+  color: var(--ink);
+  background: var(--label);
+  border: var(--rule-strong);
+  border-radius: var(--radius);
+  padding: 0 var(--s2);
+}
+
+/* ================= marks ================= */
+
+.sticker {
+  display: inline-block;
+  padding: var(--s1) var(--s2);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  color: var(--label);
+  background: var(--accent);
+  border: var(--rule-strong);
+  transform: rotate(3deg);
+}
+
+.stamp {
+  display: inline-block;
+  padding: 0.05em 0.35em 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--step-2);
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--signal);
+  border: 6px double var(--signal);
+  transform: rotate(-4deg);
+}
+
+.count { font-family: var(--font-display); font-weight: 800; font-size: var(--step-3); line-height: 0.9; }
+
+/* packing-tape progress strip: the tape runs across, the print sits below it */
+.tape-progress {
+  height: 2.25rem;
+  background: var(--paper);
+  border: var(--rule-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tape-progress__bar {
+  height: 100%;
+  width: var(--progress, 0%);
+  background: var(--tape);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 25%, 100% 50%, calc(100% - 6px) 75%, 100% 100%, 0 100%);
+  transition: width 400ms ease-out;
+}
+.tape-progress__print { margin: var(--s1) 0 0; }
+
+/* ================= notices and ledger ================= */
+
+.notice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--s2);
+  align-items: baseline;
+  padding: var(--s2) 0;
+  border-top: var(--rule-strong);
+  border-bottom: var(--rule-strong);
+}
+.notice p { margin: 0; }
+.notice--stopped .notice__tag { color: var(--accent-ink); }
+.notice--done .notice__tag { color: var(--signal); }
+
+.ledger { width: 100%; border-collapse: collapse; font-size: var(--step-0); }
+.ledger caption { text-align: left; padding-bottom: var(--s1); }
+.ledger th {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  text-align: left;
+  padding: var(--s1) var(--s2) var(--s1) 0;
+  border-bottom: var(--rule-strong);
+}
+.ledger td { padding: 0.75rem var(--s2) 0.75rem 0; border-bottom: var(--rule-faded); vertical-align: top; }
+.ledger td.num, .ledger th.num { text-align: right; }
+
+/* ================= steps (after the tool) ================= */
+/* Three stops on one taped route: an illustration, a mono stop number, two lines. No cards. */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s4);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.steps > li { max-width: none; border-top: var(--rule-strong); padding-top: var(--s2); }
+.steps img { display: block; width: 100%; height: auto; margin-bottom: var(--s2); }
+@media (max-width: 48rem) {
+  .steps { grid-template-columns: minmax(0, 1fr); }
+  .steps img { max-width: 20rem; }
+}
+
+@media (max-width: 30rem) {
+  .wrap { padding-inline: var(--s2); }
+  .label { padding: var(--s4) var(--s2) var(--s2); }
+  .perf { margin-inline: calc(-1 * var(--s2)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+@media print {
+  html, body { background: var(--label); }
+  .label { box-shadow: none; }
+  .label::before, .label::after { content: none; }
+}

@@ -1,12 +1,6 @@
 ---
-// fontsource "exports" map adds the .css extension itself
-import '@fontsource/big-shoulders-stencil-display/latin-800';
-import '@fontsource/ibm-plex-sans/latin-400';
-import '@fontsource/ibm-plex-sans/latin-400-italic';
-import '@fontsource/ibm-plex-sans/latin-600';
-import '@fontsource/ibm-plex-mono/latin-400';
-import '@fontsource/ibm-plex-mono/latin-500';
-import '../styles/tokens.css';
+// The brand kit: self-hosted fonts (@fontsource @imports), tokens and base styles. See DESIGN.md.
+import '../styles/brand.css';
 import Logo from '../components/Logo.astro';
 import { url } from '../lib/url';
 
@@ -28,7 +22,7 @@ const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
-    <meta name="theme-color" content="#e9e7e1" />
+    <meta name="theme-color" content="#dfcba6" />
   </head>
   <body>
     <a class="skip label-text" href="#main">Skip to content</a>

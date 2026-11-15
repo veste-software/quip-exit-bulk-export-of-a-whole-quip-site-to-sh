@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-labelledby="s3-t">
+  <title id="s3-t">Step 3: one ZIP, shown as a sealed carton with a shipping label, a red sticker and a green PACKED stamp</title>
+  <g stroke="#1d2638" stroke-width="4" stroke-linejoin="miter" stroke-linecap="square">
+    <!-- flat offset shadow -->
+    <rect x="100" y="70" width="300" height="240" fill="#a8743c" stroke="none"/>
+
+    <!-- the carton from above, seam taped -->
+    <rect x="90" y="60" width="300" height="240" fill="#c9b085"/>
+    <path d="M90 180 H100 M380 180 H390" fill="none"/>
+    <rect x="78" y="164" width="324" height="32" fill="#a8743c" stroke="none"/>
+
+    <!-- red sticker: comments inside -->
+    <g transform="rotate(-4 152 110)">
+      <rect x="116" y="84" width="72" height="52" fill="#c2321b"/>
+      <path d="M128 96 H156 V116 H142 L134 124 V116 H128 Z" fill="#f7f3ea" stroke="none"/>
+      <path d="M164 104 H178" stroke="#f7f3ea" fill="none"/>
+    </g>
+
+    <!-- green stamp with a tick: packed and checked -->
+    <g transform="rotate(-8 300 112)">
+      <rect x="236" y="82" width="128" height="62" fill="none" stroke="#285e41"/>
+      <rect x="245" y="91" width="110" height="44" fill="none" stroke="#285e41"/>
+      <polygon points="274,114 283,105 294,116 320,94 329,103 294,132" fill="#285e41" stroke="none"/>
+    </g>
+
+    <!-- shipping label -->
+    <g transform="rotate(-3 280 248)">
+      <rect x="196" y="210" width="168" height="76" fill="#f7f3ea"/>
+      <rect x="208" y="222" width="34" height="20" fill="#1d2638" stroke="none"/>
+      <path d="M252 228 H344 M252 240 H320" fill="none"/>
+      <g fill="#1d2638" stroke="none">
+        <rect x="210" y="254" width="4" height="22"/>
+        <rect x="218" y="254" width="8" height="22"/>
+        <rect x="230" y="254" width="4" height="22"/>
+        <rect x="238" y="254" width="4" height="22"/>
+        <rect x="246" y="254" width="12" height="22"/>
+        <rect x="262" y="254" width="4" height="22"/>
+        <rect x="270" y="254" width="8" height="22"/>
+        <rect x="282" y="254" width="4" height="22"/>
+        <rect x="290" y="254" width="12" height="22"/>
+        <rect x="306" y="254" width="4" height="22"/>
+        <rect x="314" y="254" width="8" height="22"/>
+        <rect x="326" y="254" width="4" height="22"/>
+        <rect x="334" y="254" width="4" height="22"/>
+        <rect x="342" y="254" width="8" height="22"/>
+      </g>
+    </g>
+  </g>
+</svg>
